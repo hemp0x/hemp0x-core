@@ -266,7 +266,7 @@ public:
         nRestrictedActivationBlock = 1; // Restricted activated block height
 
         // KAWPOW active immediately
-        nKAWPOWActivationTime = nGenesisTime;
+        nKAWPOWActivationTime = 0;
         /** HEMP End **/
     }
 };
@@ -486,7 +486,7 @@ public:
         nMessagingActivationBlock = 1; // Messaging activated block height
         nRestrictedActivationBlock = 1; // Restricted activated block height
 
-        nKAWPOWActivationTime     = nGenesisTime;  // KAWPOW active immediately
+        nKAWPOWActivationTime = 0;  // KAWPOW active immediately
         /** HEMP End **/
     }
 };
@@ -690,7 +690,7 @@ public:
         // TODO, we need to figure out what to do with this for regtest. This effects the unit tests
         // For now we can use a timestamp very far away
         // If you are looking to test the kawpow hashing function in regtest. You will need to change this number
-        nKAWPOWActivationTime = nGenesisTime;  // KAWPOW active immediately;
+        nKAWPOWActivationTime = 0;  // KAWPOW active immediately;
         /** HEMP End **/
     }
 };
