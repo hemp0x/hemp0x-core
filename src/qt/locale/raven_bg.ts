@@ -1601,8 +1601,8 @@ Recommended action: Fully sync your wallet before sending a transaction.
         <translation>&amp;Wallet</translation>
     </message>
     <message>
-        <source>Ravencoin Market Price</source>
-        <translation>Пазарна цена на Ravencoin</translation>
+        <source>Hemp0x Market Price</source>
+        <translation>Пазарна цена на Hemp0x</translation>
     </message>
     <message>
         <source>Brought to you by binance.com</source>
@@ -1987,8 +1987,8 @@ Recommended action: Fully sync your wallet before sending a transaction.
         <translation>Салдо</translation>
     </message>
     <message>
-        <source>123.456 RVN</source>
-        <translation>123.456 RVN</translation>
+        <source>123.456 HEMP</source>
+        <translation>123.456 HEMP</translation>
     </message>
     <message>
         <source>Copy quantity</source>

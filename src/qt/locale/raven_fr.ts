@@ -473,8 +473,8 @@
         <translation>Balance:</translation>
     </message>
     <message>
-        <source>123.456 RVN</source>
-        <translation>123.456 RVN</translation>
+        <source>123.456 HEMP</source>
+        <translation>123.456 HEMP</translation>
     </message>
     <message>
         <source>Sub Asset</source>
@@ -680,7 +680,7 @@
     </message>
     <message>
         <source>%1 will download and store a copy of the Raven block chain.</source>
-        <translation>%1 va télécharger et stocker une copie de la blockchain de Ravencoin.</translation>
+        <translation>%1 va télécharger et stocker une copie de la blockchain de Hemp0x.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -1086,8 +1086,8 @@
         <translation>Votre solde total actuel</translation>
     </message>
     <message>
-        <source>RVN Balances</source>
-        <translation>Balance RVN</translation>
+        <source>HEMP Balances</source>
+        <translation>Balance HEMP</translation>
     </message>
     <message>
         <source>Your current balance in watch-only addresses</source>
@@ -1703,8 +1703,8 @@
         <translation>Ouvrir une &amp;URI...</translation>
     </message>
     <message>
-        <source>Ravencoin Market Price</source>
-        <translation>Ravencoin Prix du Marché</translation>
+        <source>Hemp0x Market Price</source>
+        <translation>Hemp0x Prix du Marché</translation>
     </message>
     <message>
         <source>Click to disable network activity.</source>
@@ -2105,8 +2105,8 @@
         <translation>ex: 1.00000000</translation>
     </message>
     <message>
-        <source>123.456 RVN</source>
-        <translation>123.456 RVN</translation>
+        <source>123.456 HEMP</source>
+        <translation>123.456 HEMP</translation>
     </message>
     <message>
         <source>Copy change</source>

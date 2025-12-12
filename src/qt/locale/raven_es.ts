@@ -1803,8 +1803,8 @@
         <translation>&amp;Transferir Activos</translation>
     </message>
     <message>
-        <source>Transfer assets to RVN addresses</source>
-        <translation>Transferir Activos a la dirección RVN</translation>
+        <source>Transfer assets to HEMP addresses</source>
+        <translation>Transferir Activos a la dirección HEMP</translation>
     </message>
     <message>
         <source>&amp;Manage Assets</source>
@@ -1903,8 +1903,8 @@
         <translation>&amp;Monedero</translation>
     </message>
     <message>
-        <source>Ravencoin Market Price</source>
-        <translation>Precio de mercado de Ravencoin</translation>
+        <source>Hemp0x Market Price</source>
+        <translation>Precio de mercado de Hemp0x</translation>
     </message>
     <message>
         <source>Brought to you by binance.com</source>

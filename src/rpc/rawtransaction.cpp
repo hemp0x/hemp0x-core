@@ -350,13 +350,13 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
             "createrawtransaction [{\"txid\":\"id\",\"vout\":n},...] {\"address\":(amount or object),\"data\":\"hex\",...}\n"
             "                     ( locktime ) ( replaceable )\n"
             "\nCreate a transaction spending the given inputs and creating new outputs.\n"
-            "Outputs are addresses (paired with a RVN amount, data or object specifying an asset operation) or data.\n"
+            "Outputs are addresses (paired with a HEMP amount, data or object specifying an asset operation) or data.\n"
             "Returns hex-encoded raw transaction.\n"
             "Note that the transaction's inputs are not signed, and\n"
             "it is not stored in the wallet or transmitted to the network.\n"
 
             "\nPaying for Asset Operations:\n"
-            "  Some operations require an amount of RVN to be sent to a burn address:\n"
+            "  Some operations require an amount of HEMP to be sent to a burn address:\n"
             "\n"
             "    Operation          Amount + Burn Address\n"
             "    transfer                 0\n"
@@ -414,7 +414,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
             "     {\n"
             "       \"address\":                          (string, required) The destination raven address.\n"
             "                                               Each output must have a different address.\n"
-            "         x.xxx                             (number or string, required) The RVN amount\n"
+            "         x.xxx                             (number or string, required) The HEMP amount\n"
             "           or\n"
             "         {                                 (object) A json object of assets to send\n"
             "           \"transfer\":\n"
@@ -444,7 +444,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
             "               \"reissuable\":[0-1],         (number, required) 1=reissuable asset\n"
             "               \"has_ipfs\":[0-1],           (number, required) 1=passing ipfs_hash\n"
             "               \"ipfs_hash\":\"hash\"          (string, optional) an ipfs hash for discovering asset metadata\n"
-            // TODO if we decide to remove the consensus check from issue 675 https://github.com/RavenProject/Ravencoin/issues/675
+            // TODO if we decide to remove the consensus check from issue 675 https://github.com/RavenProject/Hemp0x/issues/675
    //TODO"               \"custom_owner_address\": \"addr\" (string, optional) owner token will get sent to this address if set\n"
             "             }\n"
             "         }\n"
@@ -688,7 +688,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
                 CTxOut out(nAmount, scriptPubKey);
                 rawTx.vout.push_back(out);
             }
-            /** RVN COIN START **/
+            /** HEMP COIN START **/
             else if (sendTo[name_].type() == UniValue::VOBJ) {
                 auto asset_ = sendTo[name_].get_obj();
                 auto assetKey_ = asset_.getKeys()[0];
@@ -721,7 +721,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
                     const UniValue& has_ipfs = find_value(assetData, "has_ipfs");
                     if (!has_ipfs.isNum())
                         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, missing asset metadata for key: has_ipfs");
-// TODO, if we decide to remove the consensus check https://github.com/RavenProject/Ravencoin/issues/675, remove or add the code (requires consensus change)
+// TODO, if we decide to remove the consensus check https://github.com/RavenProject/Hemp0x/issues/675, remove or add the code (requires consensus change)
 //                    const UniValue& custom_owner_address = find_value(assetData, "custom_owner_address");
 //                    if (!custom_owner_address.isNull()) {
 //                        CTxDestination dest = DecodeDestination(custom_owner_address.get_str());
@@ -891,7 +891,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
                     }
 
                     if (fHasOwnerChange && !IsValidDestinationString(owner_change_address.get_str()))
-                        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, owner_change_address is not a valid Ravencoin address");
+                        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, owner_change_address is not a valid Hemp0x address");
 
                     if (IsAssetNameAnRestricted(asset_name.get_str()))
                         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, asset_name can't be a restricted asset name. Please use reissue_restricted with the correct parameters");
@@ -1058,7 +1058,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
                     }
 
                     if (fHasOwnerChange && !IsValidDestinationString(owner_change_address.get_str()))
-                        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, owner_change_address is not a valid Ravencoin address");
+                        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, owner_change_address is not a valid Hemp0x address");
 
                     UniValue ipfs_hash = "";
                     if (has_ipfs.get_int() == 1) {
@@ -1184,7 +1184,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
 
                     if (fHasOwnerChange && !IsValidDestinationString(owner_change_address.get_str()))
                         throw JSONRPCError(RPC_INVALID_PARAMETER,
-                                           "Invalid parameter, owner_change_address is not a valid Ravencoin address");
+                                           "Invalid parameter, owner_change_address is not a valid Hemp0x address");
 
                     std::string strAssetName = asset_name.get_str();
 
@@ -1295,7 +1295,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
                     }
 
                     if (fHasRootChange && !IsValidDestinationString(root_change_address.get_str()))
-                        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, root_change_address is not a valid Ravencoin address");
+                        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, root_change_address is not a valid Hemp0x address");
 
                     CAmount nAmount = AmountFromValue(asset_quantity);
                     if (nAmount < QUALIFIER_ASSET_MIN_AMOUNT || nAmount > QUALIFIER_ASSET_MAX_AMOUNT)
@@ -1368,7 +1368,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
                         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, value for key address must be an array of size 1 to 10");
                     for (int i = 0; i < (int)addresses.size(); i++) {
                         if (!IsValidDestinationString(addresses[i].get_str()))
-                            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, supplied address is not a valid Ravencoin address");
+                            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, supplied address is not a valid Hemp0x address");
                     }
 
                     CAmount changeQty = COIN;
@@ -1413,7 +1413,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
                         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, value for key address must be an array of size 1 to 10");
                     for (int i = 0; i < (int)addresses.size(); i++) {
                         if (!IsValidDestinationString(addresses[i].get_str()))
-                            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, supplied address is not a valid Ravencoin address");
+                            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, supplied address is not a valid Hemp0x address");
                     }
 
                     // owner change
@@ -1465,7 +1465,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
             } else {
                 throw JSONRPCError(RPC_INVALID_PARAMETER, std::string("Invalid parameter, Output must be of the type object"));
             }
-            /** RVN COIN STOP **/
+            /** HEMP COIN STOP **/
         }
     }
 
@@ -1609,7 +1609,7 @@ UniValue decodescript(const JSONRPCRequest& request)
         r.push_back(Pair("p2sh", EncodeDestination(CScriptID(script))));
     }
 
-    /** RVN START */
+    /** HEMP START */
     if (type.isStr() && type.get_str() == ASSET_TRANSFER_STRING) {
         if (!AreAssetsDeployed())
             throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Assets are not active");
@@ -1681,7 +1681,7 @@ UniValue decodescript(const JSONRPCRequest& request)
     } else {
 
     }
-    /** RVN END */
+    /** HEMP END */
 
     return r;
 }

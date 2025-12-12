@@ -1591,8 +1591,8 @@
         <translation>Alamat</translation>
     </message>
     <message>
-        <source>123.456 RVN</source>
-        <translation>123.456 RVN</translation>
+        <source>123.456 HEMP</source>
+        <translation>123.456 HEMP</translation>
     </message>
     <message>
         <source>Copy fee</source>

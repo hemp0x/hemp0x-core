@@ -108,11 +108,11 @@ const QString RavenGUI::DEFAULT_WALLET = "~Default";
 /* Bit of a bodge, c++ really doesn't want you to predefine values
  * in only header files, so we do one-time value assignment here. */
 std::array<CurrencyUnitDetails, 5> CurrencyUnits::CurrencyOptions = { {
-    { "BTC",    "RVNBTC"  , 1,          8},
-    { "mBTC",   "RVNBTC"  , 1000,       5},
-    { "µBTC",   "RVNBTC"  , 1000000,    2},
-    { "Satoshi","RVNBTC"  , 100000000,  0},
-    { "USDT",   "RVNUSDT" , 1,          5}
+    { "BTC",    "HEMPBTC"  , 1,          8},
+    { "mBTC",   "HEMPBTC"  , 1000,       5},
+    { "µBTC",   "HEMPBTC"  , 1000000,    2},
+    { "Satoshi","HEMPBTC"  , 100000000,  0},
+    { "USDT",   "HEMPUSDT" , 1,          5}
 } };
 
 static bool ThreadSafeMessageBox(RavenGUI *gui, const std::string& message, const std::string& caption, unsigned int style);
@@ -171,7 +171,7 @@ RavenGUI::RavenGUI(const PlatformStyle *_platformStyle, const NetworkStyle *netw
         setCentralWidget(rpcConsole);
     }
 
-    /** RVN START */
+    /** HEMP START */
     labelCurrentMarket = new QLabel();
     labelCurrentPrice = new QLabel();
     headerWidget = new QWidget();
@@ -181,7 +181,7 @@ RavenGUI::RavenGUI(const PlatformStyle *_platformStyle, const NetworkStyle *netw
     labelVersionUpdate = new QLabel();
     networkVersionManager = new QNetworkAccessManager();
     versionRequest = new QNetworkRequest();
-    /** RVN END */
+    /** HEMP END */
 
     // Accept D&D of URIs
     setAcceptDrops(true);
@@ -366,7 +366,7 @@ void RavenGUI::createActions()
     historyAction->setFont(font);
     tabGroup->addAction(historyAction);
 
-    /** RVN START */
+    /** HEMP START */
     createAssetAction = new QAction(platformStyle->SingleColorIconOnOff(":/icons/asset_create_selected", ":/icons/asset_create"), tr("&Create Assets"), this);
     createAssetAction->setStatusTip(tr("Create new assets"));
     createAssetAction->setToolTip(createAssetAction->statusTip());
@@ -376,7 +376,7 @@ void RavenGUI::createActions()
     tabGroup->addAction(createAssetAction);
 
     transferAssetAction = new QAction(platformStyle->SingleColorIconOnOff(":/icons/asset_transfer_selected", ":/icons/asset_transfer"), tr("&Transfer Assets"), this);
-    transferAssetAction->setStatusTip(tr("Transfer assets to RVN addresses"));
+    transferAssetAction->setStatusTip(tr("Transfer assets to HEMP addresses"));
     transferAssetAction->setToolTip(transferAssetAction->statusTip());
     transferAssetAction->setCheckable(true);
     transferAssetAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
@@ -415,7 +415,7 @@ void RavenGUI::createActions()
     restrictedAssetAction->setFont(font);
     tabGroup->addAction(restrictedAssetAction);
 
-    /** RVN END */
+    /** HEMP END */
 
 #ifdef ENABLE_WALLET
     // These showNormalIfMinimized are needed because Send Coins and Receive Coins
@@ -584,7 +584,7 @@ void RavenGUI::createToolBars()
         QSettings settings;
         bool IconsOnly = settings.value("fToolbarIconsOnly", false).toBool();
 
-        /** RVN START */
+        /** HEMP START */
         // Create the background and the vertical tool bar
         QWidget* toolbarWidget = new QWidget();
 
@@ -604,7 +604,7 @@ void RavenGUI::createToolBars()
         }
         labelToolbar->setStyleSheet(".QLabel{background-color: transparent;}");
 
-        /** RVN END */
+        /** HEMP END */
 
         m_toolbar = new QToolBar();
         m_toolbar->setStyle(style());
@@ -640,7 +640,7 @@ void RavenGUI::createToolBars()
         stringToUse = normalString;
 #endif
 
-        /** RVN START */
+        /** HEMP START */
         QString tbStyleSheet = ".QToolBar {background-color : transparent; border-color: transparent; }  "
                                ".QToolButton {background-color: transparent; border-color: transparent; width: 249px; color: %1; border: none;} "
                                ".QToolButton:checked {background: none; background-color: none; selection-background-color: none; color: %2; border: none; font: %4} "
@@ -703,7 +703,7 @@ void RavenGUI::createToolBars()
         labelCurrentMarket->setAlignment(Qt::AlignVCenter);
         labelCurrentMarket->setStyleSheet(STRING_LABEL_COLOR);
         labelCurrentMarket->setFont(currentMarketFont);
-        labelCurrentMarket->setText(tr("Ravencoin Market Price"));
+        labelCurrentMarket->setText(tr("Hemp0x Market Price"));
 
         QString currentPriceStyleSheet = ".QLabel{color: %1;}";
         labelCurrentPrice->setContentsMargins(25,0,0,0);
@@ -722,7 +722,7 @@ void RavenGUI::createToolBars()
         comboRvnUnit->setStyleSheet(STRING_LABEL_COLOR);
         comboRvnUnit->setFont(currentMarketFont);
 
-        labelVersionUpdate->setText("<a href=\"https://github.com/RavenProject/Ravencoin/releases\">New Wallet Version Available</a>");
+        labelVersionUpdate->setText("<a href=\"https://github.com/RavenProject/Hemp0x/releases\">New Wallet Version Available</a>");
         labelVersionUpdate->setTextFormat(Qt::RichText);
         labelVersionUpdate->setTextInteractionFlags(Qt::TextBrowserInteraction);
         labelVersionUpdate->setOpenExternalLinks(true);
@@ -813,9 +813,9 @@ void RavenGUI::createToolBars()
         connect(pricingTimer, SIGNAL(timeout()), this, SLOT(getPriceInfo()));
         pricingTimer->start(10000);
         getPriceInfo();
-        /** RVN END */
+        /** HEMP END */
 
-        // Get the latest Ravencoin release and let the user know if they are using the latest version
+        // Get the latest Hemp0x release and let the user know if they are using the latest version
         // Network request code for the header widget
         QObject::connect(networkVersionManager, &QNetworkAccessManager::finished,
                          this, [=](QNetworkReply *reply) {
@@ -896,7 +896,7 @@ void RavenGUI::createToolBars()
                                            "New Wallet Version Found",
                                            CClientUIInterface::MSG_VERSION | CClientUIInterface::BTN_NO);
                                    if (fRet) {
-                                       QString link = "https://github.com/RavenProject/Ravencoin/releases";
+                                       QString link = "https://github.com/RavenProject/Hemp0x/releases";
                                        QDesktopServices::openUrl(QUrl(link));
                                    }
                                }
@@ -1041,14 +1041,14 @@ void RavenGUI::setWalletActionsEnabled(bool enabled)
     usedReceivingAddressesAction->setEnabled(enabled);
     openAction->setEnabled(enabled);
 
-    /** RVN START */
+    /** HEMP START */
     transferAssetAction->setEnabled(false);
     createAssetAction->setEnabled(false);
     manageAssetAction->setEnabled(false);
     messagingAction->setEnabled(false);
     votingAction->setEnabled(false);
     restrictedAssetAction->setEnabled(false);
-    /** RVN END */
+    /** HEMP END */
 }
 
 void RavenGUI::createTrayIcon(const NetworkStyle *networkStyle)
@@ -1199,7 +1199,7 @@ void RavenGUI::gotoVerifyMessageTab(QString addr)
     if (walletFrame) walletFrame->gotoVerifyMessageTab(addr);
 }
 
-/** RVN START */
+/** HEMP START */
 void RavenGUI::gotoAssetsPage()
 {
     transferAssetAction->setChecked(true);
@@ -1223,7 +1223,7 @@ void RavenGUI::gotoRestrictedAssetsPage()
     restrictedAssetAction->setChecked(true);
     if (walletFrame) walletFrame->gotoRestrictedAssetsPage();
 };
-/** RVN END */
+/** HEMP END */
 #endif // ENABLE_WALLET
 
 void RavenGUI::updateNetworkState()
@@ -1499,7 +1499,7 @@ void RavenGUI::incomingTransaction(const QString& date, int unit, const CAmount&
 {
     // On new transaction, make an info balloon
     QString msg = tr("Date: %1\n").arg(date);
-    if (assetName == "RVN")
+    if (assetName == "HEMP")
         msg += tr("Amount: %1\n").arg(RavenUnits::formatWithUnit(unit, amount, true));
     else
         msg += tr("Amount: %1\n").arg(RavenUnits::formatWithCustomName(assetName, amount, MAX_ASSET_UNITS, true));
@@ -1519,7 +1519,7 @@ void RavenGUI::checkAssets()
     // Check that status of RIP2 and activate the assets icon if it is active
     if(AreAssetsDeployed()) {
         transferAssetAction->setDisabled(false);
-        transferAssetAction->setToolTip(tr("Transfer assets to RVN addresses"));
+        transferAssetAction->setToolTip(tr("Transfer assets to HEMP addresses"));
         createAssetAction->setDisabled(false);
         createAssetAction->setToolTip(tr("Create new assets"));
         manageAssetAction->setDisabled(false);
@@ -1893,6 +1893,6 @@ void RavenGUI::mnemonic()
 
 void RavenGUI::getLatestVersion()
 {
-    versionRequest->setUrl(QUrl("https://api.github.com/repos/RavenProject/Ravencoin/releases"));
+    versionRequest->setUrl(QUrl("https://api.github.com/repos/RavenProject/Hemp0x/releases"));
     networkVersionManager->get(*versionRequest);
 }

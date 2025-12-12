@@ -1,4 +1,5 @@
 // Copyright (c) 2017-2021 The Raven Core developers
+// Modifications Copyright (c) 2025-2026 The hemp0x developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 

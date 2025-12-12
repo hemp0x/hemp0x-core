@@ -1,6 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2021 The Raven Core developers
+// Modifications Copyright (c) 2024-2025 The hemp0x developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -14,10 +15,6 @@
 
 #include <assert.h>
 #include "chainparamsseeds.h"
-
-//TODO: Take these out
-extern double algoHashTotal[16];
-extern int algoHashHits[16];
 
 
 static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
@@ -117,7 +114,7 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-        consensus.nSubsidyHalvingInterval = 2100000;  //~ 4 yrs at 1 min block time
+        consensus.nSubsidyHalvingInterval = 25000000;  //~ 3.96 yrs at 5 seconds block time
         consensus.nBIP34Enabled = true;
         consensus.nBIP65Enabled = true; // 000000000000000004c2b624ed5d7756c508d90fd0da2c7c679febfa6c4735f0
         consensus.nBIP66Enabled = true;
@@ -125,12 +122,12 @@ public:
         consensus.nCSVEnabled = true;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.kawpowLimit = uint256S("0000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // Estimated starting diff for first 180 kawpow blocks
-        consensus.nPowTargetTimespan = 2016 * 60; // 1.4 days
-        consensus.nPowTargetSpacing = 1 * 60;
+        consensus.nPowTargetTimespan = 7 * 24 * 60 * 60; // 1 week
+        consensus.nPowTargetSpacing = 1 * 5;
 		consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 1613; // Approx 80% of 2016
-        consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
+        consensus.nRuleChangeActivationThreshold = 96768; // Approx 80% of 2016
+        consensus.nMinerConfirmationWindow = 120960; // nPowTargetTimespan / nPowTargetSpacing
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -174,14 +171,14 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0x52; // R
-        pchMessageStart[1] = 0x41; // A
-        pchMessageStart[2] = 0x56; // V
-        pchMessageStart[3] = 0x4e; // N
-        nDefaultPort = 8767;
+        pchMessageStart[0] = 0x48; // H
+        pchMessageStart[1] = 0x45; // E
+        pchMessageStart[2] = 0x4d; // M
+        pchMessageStart[3] = 0x50; // P
+        nDefaultPort = 42069;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1514999494, 25023712, 0x1e00ffff, 4, 5000 * COIN);
+        genesis = CreateGenesisBlock(1514999494, 25023712, 0x1e00ffff, 4, 10 * COIN);
 
         consensus.hashGenesisBlock = genesis.GetX16RHash();
 
@@ -231,17 +228,17 @@ public:
             5.7       // * estimated number of transactions per second after that timestamp
         };
 
-        /** RVN Start **/
+        /** HEMP Start **/
         // Burn Amounts
-        nIssueAssetBurnAmount = 500 * COIN;
-        nReissueAssetBurnAmount = 100 * COIN;
-        nIssueSubAssetBurnAmount = 100 * COIN;
-        nIssueUniqueAssetBurnAmount = 5 * COIN;
-        nIssueMsgChannelAssetBurnAmount = 100 * COIN;
-        nIssueQualifierAssetBurnAmount = 1000 * COIN;
-        nIssueSubQualifierAssetBurnAmount = 100 * COIN;
-        nIssueRestrictedAssetBurnAmount = 1500 * COIN;
-        nAddNullQualifierTagBurnAmount = .1 * COIN;
+        nIssueAssetBurnAmount = .25 * COIN;
+        nReissueAssetBurnAmount = .05 * COIN;
+        nIssueSubAssetBurnAmount = .05 * COIN;
+        nIssueUniqueAssetBurnAmount = .01 * COIN;
+        nIssueMsgChannelAssetBurnAmount = .05 * COIN;
+        nIssueQualifierAssetBurnAmount = .25 * COIN;
+        nIssueSubQualifierAssetBurnAmount = .05 * COIN;
+        nIssueRestrictedAssetBurnAmount = .25 * COIN;
+        nAddNullQualifierTagBurnAmount = .05 * COIN;
 
         // Burn Addresses
         strIssueAssetBurnAddress = "RXissueAssetXXXXXXXXXXXXXXXXXhhZGt";
@@ -258,19 +255,19 @@ public:
         strGlobalBurnAddress = "RXBurnXXXXXXXXXXXXXXXXXXXXXXWUo9FV";
 
         // DGW Activation
-        nDGWActivationBlock = 338778;
+        nDGWActivationBlock = 1;
 
         nMaxReorganizationDepth = 60; // 60 at 1 minute block timespan is +/- 60 minutes.
         nMinReorganizationPeers = 4;
         nMinReorganizationAge = 60 * 60 * 12; // 12 hours
 
-        nAssetActivationHeight = 435456; // Asset activated block height
-        nMessagingActivationBlock = 1092672; // Messaging activated block height
-        nRestrictedActivationBlock = 1092672; // Restricted activated block height
+        nAssetActivationHeight = 1; // Asset activated block height
+        nMessagingActivationBlock = 1; // Messaging activated block height
+        nRestrictedActivationBlock = 1; // Restricted activated block height
 
-        nKAAAWWWPOWActivationTime = 1588788000; // UTC: Wed May 06 2020 18:00:00
-        nKAWPOWActivationTime = nKAAAWWWPOWActivationTime;
-        /** RVN End **/
+        // KAWPOW active immediately
+        nKAWPOWActivationTime = nGenesisTime;
+        /** HEMP End **/
     }
 };
 
@@ -281,7 +278,7 @@ class CTestNetParams : public CChainParams {
 public:
     CTestNetParams() {
         strNetworkID = "test";
-        consensus.nSubsidyHalvingInterval = 2100000;  //~ 4 yrs at 1 min block time
+        consensus.nSubsidyHalvingInterval = 25000000;  //~ 3.96 years at 5 second block time
         consensus.nBIP34Enabled = true;
         consensus.nBIP65Enabled = true; // 000000000000000004c2b624ed5d7756c508d90fd0da2c7c679febfa6c4735f0
         consensus.nBIP66Enabled = true;
@@ -290,12 +287,12 @@ public:
 
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.kawpowLimit = uint256S("000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nPowTargetTimespan = 2016 * 60; // 1.4 days
-        consensus.nPowTargetSpacing = 1 * 60;
+        consensus.nPowTargetTimespan = 7 * 24 * 60 * 60; // 1 week
+        consensus.nPowTargetSpacing = 1 * 5;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 1310; // Approx 65% for testchains
-        consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
+        consensus.nRuleChangeActivationThreshold = 78624; // Approx 65% for testchains
+        consensus.nMinerConfirmationWindow = 120960; // nPowTargetTimespan / nPowTargetSpacing
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -334,11 +331,11 @@ public:
         consensus.defaultAssumeValid = uint256S("0x000000006272208605c4df3b54d4d5515759105e7ffcb258e8cd8077924ffef1");
 
 
-        pchMessageStart[0] = 0x52; // R
-        pchMessageStart[1] = 0x56; // V
+        pchMessageStart[0] = 0x48; // H
+        pchMessageStart[1] = 0x54; // T
         pchMessageStart[2] = 0x4E; // N
         pchMessageStart[3] = 0x54; // T
-        nDefaultPort = 18770;
+        nDefaultPort = 42068;
         nPruneAfterHeight = 1000;
 
         uint32_t nGenesisTime = 1537466400;  // Thursday, September 20, 2018 12:00:00 PM GMT-06:00
@@ -404,7 +401,7 @@ public:
 
 //        /////////////////////////////////////////////////////////////////
 
-        genesis = CreateGenesisBlock(nGenesisTime, 15615880, 0x1e00ffff, 2, 5000 * COIN);
+        genesis = CreateGenesisBlock(nGenesisTime, 15615880, 0x1e00ffff, 2, 10 * COIN);
         consensus.hashGenesisBlock = genesis.GetX16RHash();
 
         //Test MerkleRoot and GenesisBlock
@@ -452,17 +449,17 @@ public:
             0.02        // * estimated number of transactions per second after that timestamp
         };
 
-        /** RVN Start **/
+        /** HEMP Start **/
         // Burn Amounts
-        nIssueAssetBurnAmount = 500 * COIN;
-        nReissueAssetBurnAmount = 100 * COIN;
-        nIssueSubAssetBurnAmount = 100 * COIN;
-        nIssueUniqueAssetBurnAmount = 5 * COIN;
-        nIssueMsgChannelAssetBurnAmount = 100 * COIN;
-        nIssueQualifierAssetBurnAmount = 1000 * COIN;
-        nIssueSubQualifierAssetBurnAmount = 100 * COIN;
-        nIssueRestrictedAssetBurnAmount = 1500 * COIN;
-        nAddNullQualifierTagBurnAmount = .1 * COIN;
+        nIssueAssetBurnAmount = .25 * COIN;
+        nReissueAssetBurnAmount = .05 * COIN;
+        nIssueSubAssetBurnAmount = .05 * COIN;
+        nIssueUniqueAssetBurnAmount = .01 * COIN;
+        nIssueMsgChannelAssetBurnAmount = .05 * COIN;
+        nIssueQualifierAssetBurnAmount = .25 * COIN;
+        nIssueSubQualifierAssetBurnAmount = .05 * COIN;
+        nIssueRestrictedAssetBurnAmount = .25 * COIN;
+        nAddNullQualifierTagBurnAmount = .05 * COIN;
 
         // Burn Addresses
         strIssueAssetBurnAddress = "n1issueAssetXXXXXXXXXXXXXXXXWdnemQ";
@@ -485,13 +482,12 @@ public:
         nMinReorganizationPeers = 4;
         nMinReorganizationAge = 60 * 60 * 12; // 12 hours
 
-        nAssetActivationHeight = 6048; // Asset activated block height
-        nMessagingActivationBlock = 10080; // Messaging activated block height
-        nRestrictedActivationBlock = 10080; // Restricted activated block height
+        nAssetActivationHeight = 1; // Asset activated block height
+        nMessagingActivationBlock = 1; // Messaging activated block height
+        nRestrictedActivationBlock = 1; // Restricted activated block height
 
-        nKAAAWWWPOWActivationTime = 1585159200; //Wed Mar 25 2020 18:00:00 UTC
-        nKAWPOWActivationTime = nKAAAWWWPOWActivationTime;
-        /** RVN End **/
+        nKAWPOWActivationTime     = nGenesisTime;  // KAWPOW active immediately
+        /** HEMP End **/
     }
 };
 
@@ -507,11 +503,11 @@ public:
         consensus.nBIP66Enabled = true;
         consensus.nSegwitEnabled = true;
         consensus.nCSVEnabled = true;
-        consensus.nSubsidyHalvingInterval = 150;
+        consensus.nSubsidyHalvingInterval = 25000000;
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.kawpowLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nPowTargetTimespan = 2016 * 60; // 1.4 days
-        consensus.nPowTargetSpacing = 1 * 60;
+        consensus.nPowTargetTimespan = 7 * 24 * 60 * 60; // 1 week
+        consensus.nPowTargetSpacing = 1 * 5;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
         consensus.nRuleChangeActivationThreshold = 108; // 75% for testchains
@@ -553,11 +549,11 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00");
 
-        pchMessageStart[0] = 0x43; // C
+        pchMessageStart[0] = 0x48; // H
         pchMessageStart[1] = 0x52; // R
-        pchMessageStart[2] = 0x4F; // O
-        pchMessageStart[3] = 0x57; // W
-        nDefaultPort = 18444;
+        pchMessageStart[2] = 0x45; // E
+        pchMessageStart[3] = 0x47; // G
+        nDefaultPort = 42067;
         nPruneAfterHeight = 1000;
 
 // This is used inorder to mine the genesis block. Once found, we can use the nonce and block hash found to create a valid genesis block
@@ -621,7 +617,7 @@ public:
 //        /////////////////////////////////////////////////////////////////
 
 
-        genesis = CreateGenesisBlock(1524179366, 1, 0x207fffff, 4, 5000 * COIN);
+        genesis = CreateGenesisBlock(1524179366, 1, 0x207fffff, 4, 10 * COIN);
         consensus.hashGenesisBlock = genesis.GetX16RHash();
 
         assert(consensus.hashGenesisBlock == uint256S("0x0b2c703dc93bb63a36c4e33b85be4855ddbca2ac951a7a0a29b8de0408200a3c "));
@@ -654,17 +650,17 @@ public:
         // Raven BIP44 cointype in regtest
         nExtCoinType = 1;
 
-        /** RVN Start **/
+        /** HEMP Start **/
         // Burn Amounts
-        nIssueAssetBurnAmount = 500 * COIN;
-        nReissueAssetBurnAmount = 100 * COIN;
-        nIssueSubAssetBurnAmount = 100 * COIN;
-        nIssueUniqueAssetBurnAmount = 5 * COIN;
-        nIssueMsgChannelAssetBurnAmount = 100 * COIN;
-        nIssueQualifierAssetBurnAmount = 1000 * COIN;
-        nIssueSubQualifierAssetBurnAmount = 100 * COIN;
-        nIssueRestrictedAssetBurnAmount = 1500 * COIN;
-        nAddNullQualifierTagBurnAmount = .1 * COIN;
+        nIssueAssetBurnAmount = .25 * COIN;
+        nReissueAssetBurnAmount = .05 * COIN;
+        nIssueSubAssetBurnAmount = .05 * COIN;
+        nIssueUniqueAssetBurnAmount = .01 * COIN;
+        nIssueMsgChannelAssetBurnAmount = .05 * COIN;
+        nIssueQualifierAssetBurnAmount = .25 * COIN;
+        nIssueSubQualifierAssetBurnAmount = .05 * COIN;
+        nIssueRestrictedAssetBurnAmount = .25 * COIN;
+        nAddNullQualifierTagBurnAmount = .05 * COIN;
 
         // Burn Addresses
         strIssueAssetBurnAddress = "n1issueAssetXXXXXXXXXXXXXXXXWdnemQ";
@@ -681,22 +677,21 @@ public:
         strGlobalBurnAddress = "n1BurnXXXXXXXXXXXXXXXXXXXXXXU1qejP";
 
         // DGW Activation
-        nDGWActivationBlock = 200;
+        nDGWActivationBlock = 1;
 
         nMaxReorganizationDepth = 60; // 60 at 1 minute block timespan is +/- 60 minutes.
         nMinReorganizationPeers = 4;
         nMinReorganizationAge = 60 * 60 * 12; // 12 hours
 
-        nAssetActivationHeight = 0; // Asset activated block height
-        nMessagingActivationBlock = 0; // Messaging activated block height
-        nRestrictedActivationBlock = 0; // Restricted activated block height
+        nAssetActivationHeight = 1; // Asset activated block height
+        nMessagingActivationBlock = 1; // Messaging activated block height
+        nRestrictedActivationBlock = 1; // Restricted activated block height
 
         // TODO, we need to figure out what to do with this for regtest. This effects the unit tests
         // For now we can use a timestamp very far away
         // If you are looking to test the kawpow hashing function in regtest. You will need to change this number
-        nKAAAWWWPOWActivationTime = 3582830167;
-        nKAWPOWActivationTime = nKAAAWWWPOWActivationTime;
-        /** RVN End **/
+        nKAWPOWActivationTime = nGenesisTime;  // KAWPOW active immediately;
+        /** HEMP End **/
     }
 };
 
