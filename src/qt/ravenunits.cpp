@@ -1,5 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Modifications Copyright (c) The Hemp0x developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -52,9 +53,9 @@ QString RavenUnits::description(int unit)
 {
     switch(unit)
     {
-    case HEMP: return QString("Ravens");
-    case mHEMP: return QString("Milli-Ravens (1 / 1" THIN_SP_UTF8 "000)");
-    case uHEMP: return QString("Micro-Ravens (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case HEMP: return QString("HEMP");
+    case mHEMP: return QString("Milli-HEMP (1 / 1" THIN_SP_UTF8 "000)");
+    case uHEMP: return QString("Micro-HEMP (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }
 }
