@@ -123,3 +123,23 @@ contrib/devtools/split-debug.sh
 cmake-build-debug
 
 CMakeLists.txt
+
+# ===== Hemp0x-specific ignores =====
+
+# Hemp0x binaries
+src/hemp0xd
+src/hemp0x-cli
+src/hemp0x-tx
+
+# Genesis / mining artifacts
+GENESIS_FOUND.txt
+genloop.sh
+
+# Depends build output
+depends/work/
+depends/built/
+depends/*-linux-gnu/
+
+# Local build helpers
+fix_depends.py
+depends/project-config.jam

@@ -1,1 +1,18 @@
 src/clientversion.cpp export-subst
+
+# Normalize text files
+* text=auto eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+
+# C/C++ source
+*.c text
+*.cpp text
+*.h text
+
+# Build / config
+Makefile text
+*.mk text
+*.am text
+*.ac text

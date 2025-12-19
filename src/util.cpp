@@ -88,8 +88,8 @@
 // Application startup time (used for uptime calculation)
 const int64_t nStartupTime = GetTime();
 
-const char *const RAVEN_CONF_FILENAME = "raven.conf";
-const char *const RAVEN_PID_FILENAME = "ravend.pid";
+const char *const RAVEN_CONF_FILENAME = "hemp.conf";
+const char *const RAVEN_PID_FILENAME = "hemp.pid";
 
 ArgsManager gArgs;
 bool fPrintToConsole = false;
@@ -568,7 +568,7 @@ fs::path GetDefaultDataDir()
     return pathRet / "Library/Application Support/Raven";
 #else
     // Unix
-    return pathRet / ".raven";
+    return pathRet / ".hemp0x";
 #endif
 #endif
 }
