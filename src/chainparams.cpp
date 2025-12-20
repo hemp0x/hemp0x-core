@@ -245,6 +245,7 @@ public:
 
         // DGW Activation
         nDGWActivationBlock = 1;
+	consensus.nDGWFixHeight = 181;
 
         nMaxReorganizationDepth = 60; // 60 at 1 minute block timespan is +/- 60 minutes.
         nMinReorganizationPeers = 4;

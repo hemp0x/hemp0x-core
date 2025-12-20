@@ -78,6 +78,7 @@ struct Params {
     uint256 defaultAssumeValid;
     bool nSegwitEnabled;
     bool nCSVEnabled;
+    int nDGWFixHeight;
 };
 } // namespace Consensus
 

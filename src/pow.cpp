@@ -19,51 +19,66 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
     /* current difficulty formula, dash - DarkGravity v3, written by Evan Duffield - evan@dash.org */
     assert(pindexLast != nullptr);
 
-    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
-    int64_t nPastBlocks = 180; // ~3hr
+    const unsigned int nPowLimitBits = bnPowLimit.GetCompact();
 
-    // make sure we have at least (nPastBlocks + 1) blocks, otherwise just return powLimit
-    if (!pindexLast || pindexLast->nHeight < nPastBlocks) {
-        return bnPowLimit.GetCompact();
+    const int64_t nPastBlocks = 180;
+
+    const int nextHeight = pindexLast->nHeight + 1;
+
+    // ---------------------------------------------------------------------
+    //
+    // If DGW got poisoned (insane difficulty) near height ~180, forcing only
+    // one block (181) isn't enough because DGW uses the last 180 nBits values.
+    // We force powLimit long enough to overwrite that history.
+    //
+    // ---------------------------------------------------------------------
+    if (nextHeight >= params.nDGWFixHeight &&
+        nextHeight <  params.nDGWFixHeight + nPastBlocks)
+    {
+        return nPowLimitBits;
+    }
+
+    // Need at least nPastBlocks blocks, otherwise return powLimit
+    if (pindexLast->nHeight < nPastBlocks) {
+        return nPowLimitBits;
     }
 
     if (params.fPowAllowMinDifficultyBlocks && params.fPowNoRetargeting) {
         // Special difficulty rule:
         // If the new block's timestamp is more than 2 * 1 minutes
         // then allow mining of a min-difficulty block.
-        if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 2)
-            return nProofOfWorkLimit;
-        else {
-            // Return the last non-special-min-difficulty-rules-block
-            const CBlockIndex *pindex = pindexLast;
-            while (pindex->pprev && pindex->nHeight % params.DifficultyAdjustmentInterval() != 0 &&
-                   pindex->nBits == nProofOfWorkLimit)
+
+        if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 2) {
+            return nPowLimitBits;
+        } else {
+            const CBlockIndex* pindex = pindexLast;
+            while (pindex->pprev &&
+                   pindex->nHeight % params.DifficultyAdjustmentInterval() != 0 &&
+                   pindex->nBits == nPowLimitBits)
+            {
                 pindex = pindex->pprev;
+            }
             return pindex->nBits;
         }
     }
 
-    const CBlockIndex *pindex = pindexLast;
+    const CBlockIndex* pindex = pindexLast;
     arith_uint256 bnPastTargetAvg;
 
     int nKAWPOWBlocksFound = 0;
-    for (unsigned int nCountBlocks = 1; nCountBlocks <= nPastBlocks; nCountBlocks++) {
-        arith_uint256 bnTarget = arith_uint256().SetCompact(pindex->nBits);
-        if (nCountBlocks == 1) {
-            bnPastTargetAvg = bnTarget;
-        } else {
-            // NOTE: that's not an average really...
-            bnPastTargetAvg = (bnPastTargetAvg * nCountBlocks + bnTarget) / (nCountBlocks + 1);
-        }
 
-        // Count how blocks are KAWPOW mined in the last 180 blocks
-        if (pindex->nTime >= nKAWPOWActivationTime) {
-            nKAWPOWBlocksFound++;
-        }
+    for (int i = 1; i <= nPastBlocks; ++i) {
+        arith_uint256 bnTarget;
+        bnTarget.SetCompact(pindex->nBits);
 
-        if(nCountBlocks != nPastBlocks) {
-            assert(pindex->pprev); // should never fail
+        if (i == 1) bnPastTargetAvg = bnTarget;
+        else        bnPastTargetAvg = (bnPastTargetAvg * i + bnTarget) / (i + 1);
+
+        if (pindex->nTime >= nKAWPOWActivationTime) nKAWPOWBlocksFound++;
+
+        if (i != nPastBlocks) {
+            assert(pindex->pprev);
             pindex = pindex->pprev;
         }
     }
@@ -74,8 +89,7 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
     // change the DGW math.
     if (pblock->nTime >= nKAWPOWActivationTime) {
         if (nKAWPOWBlocksFound != nPastBlocks) {
-            const arith_uint256 bnKawPowLimit = UintToArith256(params.kawpowLimit);
-            return bnKawPowLimit.GetCompact();
+            return UintToArith256(params.kawpowLimit).GetCompact();
         }
     }
 
@@ -83,20 +97,27 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
 
     int64_t nActualTimespan = pindexLast->GetBlockTime() - pindex->GetBlockTime();
     // NOTE: is this accurate? nActualTimespan counts it for (nPastBlocks - 1) blocks only...
-    int64_t nTargetTimespan = nPastBlocks * params.nPowTargetSpacing;
 
-    if (nActualTimespan < nTargetTimespan/3)
-        nActualTimespan = nTargetTimespan/3;
-    if (nActualTimespan > nTargetTimespan*3)
-        nActualTimespan = nTargetTimespan*3;
+    const int64_t nTargetTimespan = nPastBlocks * params.nPowTargetSpacing;
+
+    // Post-fix safety: never allow 0/negative timespans
+    if (nextHeight >= params.nDGWFixHeight) {
+        if (nActualTimespan < 1) nActualTimespan = 1;
+
+        // Optional: keep extremely fast chains from causing wild spikes
+        if (nActualTimespan < params.nPowTargetSpacing)
+            nActualTimespan = params.nPowTargetSpacing;
+    }
+
+    // DGW clamp
+    if (nActualTimespan < nTargetTimespan / 3) nActualTimespan = nTargetTimespan / 3;
+    if (nActualTimespan > nTargetTimespan * 3) nActualTimespan = nTargetTimespan * 3;
 
     // Retarget
     bnNew *= nActualTimespan;
     bnNew /= nTargetTimespan;
 
-    if (bnNew > bnPowLimit) {
-        bnNew = bnPowLimit;
-    }
+    if (bnNew > bnPowLimit) bnNew = bnPowLimit;
 
     return bnNew.GetCompact();
 }
