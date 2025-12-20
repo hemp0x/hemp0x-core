@@ -1,6 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2020 The Raven Core developers
+// Modified Copyright (c) 2025-2026 The Hemp0x developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,6 +16,11 @@
 #include "chainparams.h"
 #include "tinyformat.h"
 
+bool IsDGWActive(int nHeight)
+{
+    return nHeight >= Params().GetConsensus().nDGWFixHeight;
+}
+
 unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params) {
     /* current difficulty formula, dash - DarkGravity v3, written by Evan Duffield - evan@dash.org */
     assert(pindexLast != nullptr);
@@ -22,6 +28,19 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
     int64_t nPastBlocks = 180; // ~3hr
+
+    const int nextHeight = pindexLast->nHeight + 1;
+
+// ---------------------------------------------------------------------
+// Flush poisoned DGW history after activation by forcing powLimit long
+// enough to overwrite the last 180 nBits values.
+// ---------------------------------------------------------------------
+if (nextHeight >= params.nDGWFixHeight &&
+    nextHeight <  params.nDGWFixHeight + nPastBlocks)
+{
+    return nProofOfWorkLimit;
+}
+
 
     // make sure we have at least (nPastBlocks + 1) blocks, otherwise just return powLimit
     if (!pindexLast || pindexLast->nHeight < nPastBlocks) {
@@ -84,6 +103,15 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
     int64_t nActualTimespan = pindexLast->GetBlockTime() - pindex->GetBlockTime();
     // NOTE: is this accurate? nActualTimespan counts it for (nPastBlocks - 1) blocks only...
     int64_t nTargetTimespan = nPastBlocks * params.nPowTargetSpacing;
+
+    // Post-fix safety: prevent zero / ultra-fast timespans after DGW activation
+if (nextHeight >= params.nDGWFixHeight) {
+    if (nActualTimespan < 1)
+        nActualTimespan = 1;
+
+    if (nActualTimespan < params.nPowTargetSpacing)
+        nActualTimespan = params.nPowTargetSpacing;
+}
 
     if (nActualTimespan < nTargetTimespan/3)
         nActualTimespan = nTargetTimespan/3;
