@@ -1,6 +1,6 @@
 ### TestGen ###
 
-Utilities to generate test vectors for the data-driven Raven tests.
+Utilities to generate test vectors for the data-driven Hemp0x tests.
 
 Usage: 
 

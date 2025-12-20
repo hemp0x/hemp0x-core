@@ -1,0 +1,33 @@
+# /etc/conf.d/hemp0xd: config file for /etc/init.d/hemp0xd
+
+# Config file location
+#HEMP0XD_CONFIGFILE="/etc/hemp0x/hemp0x.conf"
+
+# What directory to write pidfile to?  (created and owned by $HEMP0XD_USER)
+#HEMP0XD_PIDDIR="/var/run/hemp0xd"
+
+# What filename to give the pidfile
+#HEMP0XD_PIDFILE="${HEMP0XD_PIDDIR}/hemp0xd.pid"
+
+# Where to write hemp0xd data (be mindful that the blockchain is large)
+#HEMP0XD_DATADIR="/var/lib/hemp0xd"
+
+# User and group to own hemp0xd process
+#HEMP0XD_USER="hemp0x"
+#HEMP0XD_GROUP="hemp0x"
+
+# Path to hemp0xd executable
+#HEMP0XD_BIN="/usr/bin/hemp0xd"
+
+# Nice value to run hemp0xd under
+#HEMP0XD_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#HEMP0XD_OPTS=""
+
+# The timeout in seconds OpenRC will wait for hemp0xd to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+HEMP0XD_SIGTERM_TIMEOUT=60

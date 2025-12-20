@@ -19,28 +19,28 @@ else
 LIBUNIVALUE = $(UNIVALUE_LIBS)
 endif
 
-RAVEN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
+HEMP0X_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
 
-RAVEN_INCLUDES += -I$(srcdir)/secp256k1/include
-RAVEN_INCLUDES += $(UNIVALUE_CFLAGS)
+HEMP0X_INCLUDES += -I$(srcdir)/secp256k1/include
+HEMP0X_INCLUDES += $(UNIVALUE_CFLAGS)
 
-LIBRAVEN_SERVER=libraven_server.a
-LIBRAVEN_COMMON=libraven_common.a
-LIBRAVEN_CONSENSUS=libraven_consensus.a
-LIBRAVEN_CLI=libhemp0x_cli.a
-LIBRAVEN_UTIL=libraven_util.a
-LIBRAVEN_CRYPTO=crypto/libraven_crypto.a
-LIBRAVENQT=qt/libravenqt.a
+LIBHEMP0X_SERVER=libhemp0x_server.a
+LIBHEMP0X_COMMON=libhemp0x_common.a
+LIBHEMP0X_CONSENSUS=libhemp0x_consensus.a
+LIBHEMP0X_CLI=libhemp0x_cli.a
+LIBHEMP0X_UTIL=libhemp0x_util.a
+LIBHEMP0X_CRYPTO=crypto/libhemp0x_crypto.a
+LIBHEMP0XQT=qt/libhemp0xqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
 
 if ENABLE_ZMQ
-LIBRAVEN_ZMQ=libraven_zmq.a
+LIBHEMP0X_ZMQ=libhemp0x_zmq.a
 endif
-if BUILD_RAVEN_LIBS
-LIBRAVENCONSENSUS=libravenconsensus.la
+if BUILD_HEMP0X_LIBS
+LIBHEMP0XCONSENSUS=libhemp0xconsensus.la
 endif
 if ENABLE_WALLET
-LIBRAVEN_WALLET=libraven_wallet.a
+LIBHEMP0X_WALLET=libhemp0x_wallet.a
 endif
 
 $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
@@ -49,37 +49,37 @@ $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
 # Make is not made aware of per-object dependencies to avoid limiting building parallelization
 # But to build the less dependent modules first, we manually select their order here:
 EXTRA_LIBRARIES += \
-  $(LIBRAVEN_CRYPTO) \
-  $(LIBRAVEN_UTIL) \
-  $(LIBRAVEN_COMMON) \
-  $(LIBRAVEN_CONSENSUS) \
-  $(LIBRAVEN_SERVER) \
-  $(LIBRAVEN_CLI) \
-  $(LIBRAVEN_WALLET) \
-  $(LIBRAVEN_ZMQ)
+  $(LIBHEMP0X_CRYPTO) \
+  $(LIBHEMP0X_UTIL) \
+  $(LIBHEMP0X_COMMON) \
+  $(LIBHEMP0X_CONSENSUS) \
+  $(LIBHEMP0X_SERVER) \
+  $(LIBHEMP0X_CLI) \
+  $(LIBHEMP0X_WALLET) \
+  $(LIBHEMP0X_ZMQ)
 
-lib_LTLIBRARIES = $(LIBRAVENCONSENSUS)
+lib_LTLIBRARIES = $(LIBHEMP0XCONSENSUS)
 
 bin_PROGRAMS =
 noinst_PROGRAMS =
 TESTS =
 BENCHMARKS =
 
-if BUILD_RAVEND
+if BUILD_HEMP0XD
   bin_PROGRAMS += hemp0xd
 endif
 
-if BUILD_RAVEN_CLI
+if BUILD_HEMP0X_CLI
   bin_PROGRAMS += hemp0x-cli
 endif
 
-if BUILD_RAVEN_TX
+if BUILD_HEMP0X_TX
   bin_PROGRAMS += hemp0x-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
-# raven core #
-RAVEN_CORE_H = \
+# hemp0x core #
+HEMP0X_CORE_H = \
   addrdb.h \
   addressindex.h \
   algo/sph_groestl.h \
@@ -240,12 +240,12 @@ obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj
 	@$(top_srcdir)/share/genbuild.sh "$(abs_top_builddir)/src/obj/build.h" \
 	  "$(abs_top_srcdir)"
-libraven_util_a-clientversion.$(OBJEXT): obj/build.h
+libhemp0x_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between hemp0xd and raven-qt
-libraven_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
-libraven_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libraven_server_a_SOURCES = \
+# server: shared between hemp0xd and hemp0x-qt
+libhemp0x_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(HEMP0X_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
+libhemp0x_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhemp0x_server_a_SOURCES = \
   addrdb.cpp \
   addrman.cpp \
   bloom.cpp \
@@ -297,23 +297,23 @@ libraven_server_a_SOURCES = \
   validation.cpp \
   validationinterface.cpp \
   versionbits.cpp \
-  $(RAVEN_CORE_H)
+  $(HEMP0X_CORE_H)
 
 if ENABLE_ZMQ
-libraven_zmq_a_CPPFLAGS = $(RAVEN_INCLUDES) $(ZMQ_CFLAGS)
-libraven_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libraven_zmq_a_SOURCES = \
+libhemp0x_zmq_a_CPPFLAGS = $(HEMP0X_INCLUDES) $(ZMQ_CFLAGS)
+libhemp0x_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhemp0x_zmq_a_SOURCES = \
   zmq/zmqabstractnotifier.cpp \
   zmq/zmqnotificationinterface.cpp \
   zmq/zmqpublishnotifier.cpp
 endif
 
 
-# wallet: shared between hemp0xd and raven-qt, but only linked
+# wallet: shared between hemp0xd and hemp0x-qt, but only linked
 # when wallet enabled
-libraven_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
-libraven_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libraven_wallet_a_SOURCES = \
+libhemp0x_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(HEMP0X_INCLUDES)
+libhemp0x_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhemp0x_wallet_a_SOURCES = \
   wallet/crypter.cpp \
   wallet/db.cpp \
   wallet/feebumper.cpp \
@@ -324,12 +324,12 @@ libraven_wallet_a_SOURCES = \
   wallet/wallet.cpp \
   wallet/walletdb.cpp \
   wallet/bip39.cpp \
-  $(RAVEN_CORE_H)
+  $(HEMP0X_CORE_H)
 
 # crypto primitives library
-crypto_libraven_crypto_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libraven_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libraven_crypto_a_SOURCES = \
+crypto_libhemp0x_crypto_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libhemp0x_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libhemp0x_crypto_a_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
   crypto/chacha20.h \
@@ -372,13 +372,13 @@ crypto_libraven_crypto_a_SOURCES = \
   crypto/ethash/progpow_test_vectors.hpp
 
 if USE_ASM
-crypto_libraven_crypto_a_SOURCES += crypto/sha256_sse4.cpp
+crypto_libhemp0x_crypto_a_SOURCES += crypto/sha256_sse4.cpp
 endif
 
 # consensus: shared between all executables that validate any consensus rules.
-libraven_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
-libraven_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libraven_consensus_a_SOURCES = \
+libhemp0x_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(HEMP0X_INCLUDES)
+libhemp0x_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhemp0x_consensus_a_SOURCES = \
   amount.h \
   arith_uint256.cpp \
   arith_uint256.h \
@@ -395,7 +395,7 @@ libraven_consensus_a_SOURCES = \
   primitives/transaction.h \
   pubkey.cpp \
   pubkey.h \
-  script/ravenconsensus.cpp \
+  script/hemp0xconsensus.cpp \
   script/interpreter.cpp \
   script/interpreter.h \
   script/script.cpp \
@@ -413,12 +413,12 @@ libraven_consensus_a_SOURCES = \
   version.h \
   LibBoolEE.cpp \
   LibBoolEE.h \
-  $(RAVEN_CORE_H)
+  $(HEMP0X_CORE_H)
 
-# common: shared between hemp0xd, and raven-qt and non-server tools
-libraven_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
-libraven_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libraven_common_a_SOURCES = \
+# common: shared between hemp0xd, and hemp0x-qt and non-server tools
+libhemp0x_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(HEMP0X_INCLUDES)
+libhemp0x_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhemp0x_common_a_SOURCES = \
   base58.cpp \
   chainparams.cpp \
   coins.cpp \
@@ -435,14 +435,14 @@ libraven_common_a_SOURCES = \
   script/sign.cpp \
   script/standard.cpp \
   warnings.cpp \
-  $(RAVEN_CORE_H)
+  $(HEMP0X_CORE_H)
 
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
 # backward-compatibility objects and their sanity checks are linked.
-libraven_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
-libraven_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libraven_util_a_SOURCES = \
+libhemp0x_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(HEMP0X_INCLUDES)
+libhemp0x_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhemp0x_util_a_SOURCES = \
   support/lockedpool.cpp \
   chainparamsbase.cpp \
   clientversion.cpp \
@@ -458,26 +458,26 @@ libraven_util_a_SOURCES = \
   utilmoneystr.cpp \
   utilstrencodings.cpp \
   utiltime.cpp \
-  $(RAVEN_CORE_H)
+  $(HEMP0X_CORE_H)
 
 if GLIBC_BACK_COMPAT
-libraven_util_a_SOURCES += compat/glibc_compat.cpp
+libhemp0x_util_a_SOURCES += compat/glibc_compat.cpp
 AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
-# cli: shared between hemp0x-cli and raven-qt
-libhemp0x_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
+# cli: shared between hemp0x-cli and hemp0x-qt
+libhemp0x_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(HEMP0X_INCLUDES)
 libhemp0x_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libhemp0x_cli_a_SOURCES = \
   rpc/client.cpp \
-  $(RAVEN_CORE_H)
+  $(HEMP0X_CORE_H)
 
-nodist_libraven_util_a_SOURCES = $(srcdir)/obj/build.h
+nodist_libhemp0x_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # hemp0xd binary #
 hemp0xd_SOURCES = hemp0xd.cpp
-hemp0xd_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
+hemp0xd_CPPFLAGS = $(AM_CPPFLAGS) $(HEMP0X_INCLUDES)
 hemp0xd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 hemp0xd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
@@ -486,14 +486,14 @@ hemp0xd_SOURCES += hemp0xd-res.rc
 endif
 
 hemp0xd_LDADD = \
-  $(LIBRAVEN_SERVER) \
-  $(LIBRAVEN_COMMON) \
+  $(LIBHEMP0X_SERVER) \
+  $(LIBHEMP0X_COMMON) \
   $(LIBUNIVALUE) \
-  $(LIBRAVEN_UTIL) \
-  $(LIBRAVEN_WALLET) \
-  $(LIBRAVEN_ZMQ) \
-  $(LIBRAVEN_CONSENSUS) \
-  $(LIBRAVEN_CRYPTO) \
+  $(LIBHEMP0X_UTIL) \
+  $(LIBHEMP0X_WALLET) \
+  $(LIBHEMP0X_ZMQ) \
+  $(LIBHEMP0X_CONSENSUS) \
+  $(LIBHEMP0X_CRYPTO) \
   $(LIBLEVELDB) \
   $(LIBLEVELDB_SSE42) \
   $(LIBMEMENV) \
@@ -503,7 +503,7 @@ hemp0xd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNP
 
 # hemp0x-cli binary #
 hemp0x_cli_SOURCES = hemp0x-cli.cpp
-hemp0x_cli_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES) $(EVENT_CFLAGS)
+hemp0x_cli_CPPFLAGS = $(AM_CPPFLAGS) $(HEMP0X_INCLUDES) $(EVENT_CFLAGS)
 hemp0x_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 hemp0x_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
@@ -512,17 +512,17 @@ hemp0x_cli_SOURCES += hemp0x-cli-res.rc
 endif
 
 hemp0x_cli_LDADD = \
-  $(LIBRAVEN_CLI) \
+  $(LIBHEMP0X_CLI) \
   $(LIBUNIVALUE) \
-  $(LIBRAVEN_UTIL) \
-  $(LIBRAVEN_CRYPTO)
+  $(LIBHEMP0X_UTIL) \
+  $(LIBHEMP0X_CRYPTO)
 
 hemp0x_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
 # hemp0x-tx binary #
 hemp0x_tx_SOURCES = hemp0x-tx.cpp
-hemp0x_tx_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
+hemp0x_tx_CPPFLAGS = $(AM_CPPFLAGS) $(HEMP0X_INCLUDES)
 hemp0x_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 hemp0x_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
@@ -532,28 +532,28 @@ endif
 
 hemp0x_tx_LDADD = \
   $(LIBUNIVALUE) \
-  $(LIBRAVEN_COMMON) \
-  $(LIBRAVEN_UTIL) \
-  $(LIBRAVEN_CONSENSUS) \
-  $(LIBRAVEN_CRYPTO) \
+  $(LIBHEMP0X_COMMON) \
+  $(LIBHEMP0X_UTIL) \
+  $(LIBHEMP0X_CONSENSUS) \
+  $(LIBHEMP0X_CRYPTO) \
   $(LIBSECP256K1)
 
 hemp0x_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
-# ravenconsensus library #
-if BUILD_RAVEN_LIBS
-include_HEADERS = script/ravenconsensus.h
-libravenconsensus_la_SOURCES = $(crypto_libraven_crypto_a_SOURCES) $(libraven_consensus_a_SOURCES)
+# hemp0xconsensus library #
+if BUILD_HEMP0X_LIBS
+include_HEADERS = script/hemp0xconsensus.h
+libhemp0xconsensus_la_SOURCES = $(crypto_libhemp0x_crypto_a_SOURCES) $(libhemp0x_consensus_a_SOURCES)
 
 if GLIBC_BACK_COMPAT
-  libravenconsensus_la_SOURCES += compat/glibc_compat.cpp
+  libhemp0xconsensus_la_SOURCES += compat/glibc_compat.cpp
 endif
 
-libravenconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-libravenconsensus_la_LIBADD = $(LIBSECP256K1) $(BOOST_LIBS)
-libravenconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_RAVEN_INTERNAL
-libravenconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhemp0xconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
+libhemp0xconsensus_la_LIBADD = $(LIBSECP256K1) $(BOOST_LIBS)
+libhemp0xconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_HEMP0X_INTERNAL
+libhemp0xconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 endif
 #
@@ -583,12 +583,12 @@ CLEANFILES += obj/build.h
 EXTRA_DIST = $(CTAES_DIST)
 
 
-config/raven-config.h: config/stamp-h1
+config/hemp0x-config.h: config/stamp-h1
 	@$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-config/stamp-h1: $(top_srcdir)/$(subdir)/config/raven-config.h.in $(top_builddir)/config.status
+config/stamp-h1: $(top_srcdir)/$(subdir)/config/hemp0x-config.h.in $(top_builddir)/config.status
 	$(AM_V_at)$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-$(top_srcdir)/$(subdir)/config/raven-config.h.in:  $(am__configure_deps)
-	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/raven-config.h.in
+$(top_srcdir)/$(subdir)/config/hemp0x-config.h.in:  $(am__configure_deps)
+	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/hemp0x-config.h.in
 
 clean-local:
 	-$(MAKE) -C secp256k1 clean

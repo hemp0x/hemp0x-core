@@ -1,0 +1,67 @@
+#!/bin/bash
+#
+#  hemp0xd The hemp0x core server.
+#
+#
+# chkconfig: 345 80 20
+# description: hemp0xd
+# processname: hemp0xd
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# you can override defaults in /etc/sysconfig/hemp0xd, see below
+if [ -f /etc/sysconfig/hemp0xd ]; then
+        . /etc/sysconfig/hemp0xd
+fi
+
+RETVAL=0
+
+prog=hemp0xd
+# you can override the lockfile via HEMP0XD_LOCKFILE in /etc/sysconfig/hemp0xd
+lockfile=${HEMP0XD_LOCKFILE-/var/lock/subsys/hemp0xd}
+
+# hemp0xd defaults to /usr/bin/hemp0xd, override with HEMP0XD_BIN
+hemp0xd=${HEMP0XD_BIN-/usr/bin/hemp0xd}
+
+# hemp0xd opts default to -disablewallet, override with HEMP0XD_OPTS
+hemp0xd_opts=${HEMP0XD_OPTS--disablewallet}
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $DAEMONOPTS $hemp0xd $hemp0xd_opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: service $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac

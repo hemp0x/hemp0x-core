@@ -5,7 +5,7 @@
 
 #include "compat/sanity.h"
 #include "key.h"
-#include "test/test_raven.h"
+#include "test/test_hemp0x.h"
 
 #include <boost/test/unit_test.hpp>
 

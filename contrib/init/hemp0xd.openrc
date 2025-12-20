@@ -1,0 +1,92 @@
+#!/sbin/runscript
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/hemp0x/.hemp0x" ]; then
+	HEMP0XD_DEFAULT_DATADIR="/var/lib/hemp0x/.hemp0x"
+else
+	HEMP0XD_DEFAULT_DATADIR="/var/lib/hemp0xd"
+fi
+
+HEMP0XD_CONFIGFILE=${HEMP0XD_CONFIGFILE:-/etc/hemp0x/hemp0x.conf}
+HEMP0XD_PIDDIR=${HEMP0XD_PIDDIR:-/var/run/hemp0xd}
+HEMP0XD_PIDFILE=${HEMP0XD_PIDFILE:-${HEMP0XD_PIDDIR}/hemp0xd.pid}
+HEMP0XD_DATADIR=${HEMP0XD_DATADIR:-${HEMP0XD_DEFAULT_DATADIR}}
+HEMP0XD_USER=${HEMP0XD_USER:-${HEMP0X_USER:-hemp0x}}
+HEMP0XD_GROUP=${HEMP0XD_GROUP:-hemp0x}
+HEMP0XD_BIN=${HEMP0XD_BIN:-/usr/bin/hemp0xd}
+HEMP0XD_NICE=${HEMP0XD_NICE:-${NICELEVEL:-0}}
+HEMP0XD_OPTS="${HEMP0XD_OPTS:-${HEMP0X_OPTS}}"
+
+name="Hemp0x Core Daemon"
+description="Hemp0x cryptocurrency P2P network daemon"
+
+command="/usr/bin/hemp0xd"
+command_args="-pid=\"${HEMP0XD_PIDFILE}\" \
+		-conf=\"${HEMP0XD_CONFIGFILE}\" \
+		-datadir=\"${HEMP0XD_DATADIR}\" \
+		-daemon \
+		${HEMP0XD_OPTS}"
+
+required_files="${HEMP0XD_CONFIGFILE}"
+start_stop_daemon_args="-u ${HEMP0XD_USER} \
+			-N ${HEMP0XD_NICE} -w 2000"
+pidfile="${HEMP0XD_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${HEMP0XD_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${HEMP0XD_USER}:${HEMP0XD_GROUP}" \
+	"${HEMP0XD_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${HEMP0XD_USER}:${HEMP0XD_GROUP}" \
+	"${HEMP0XD_PIDDIR}"
+
+	checkpath -f \
+	-o ${HEMP0XD_USER}:${HEMP0XD_GROUP} \
+	-m 0660 \
+	${HEMP0XD_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${HEMP0XD_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run hemp0xd."
+		eerror "The setting must appear in ${HEMP0XD_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following "
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"Hemp0x Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

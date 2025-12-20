@@ -1,3 +1,3 @@
 Releases have been moved to:
 
-https://github.com/RavenProject/Ravencoin/releases/latest
+https://github.com/hemp0x/hemp0x-core/releases/latest

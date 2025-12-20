@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_ASSETSDIALOG_H
-#define RAVEN_QT_ASSETSDIALOG_H
+#ifndef HEMP0X_QT_ASSETSDIALOG_H
+#define HEMP0X_QT_ASSETSDIALOG_H
 
 #include "walletmodel.h"
 
@@ -26,7 +26,7 @@ QT_BEGIN_NAMESPACE
 class QUrl;
 QT_END_NAMESPACE
 
-/** Dialog for sending ravens */
+/** Dialog for sending hemp0xs */
 class AssetsDialog : public QDialog
 {
     Q_OBJECT
@@ -118,4 +118,4 @@ private Q_SLOTS:
             void message(const QString &title, const QString &message, unsigned int style);
 };
 
-#endif // RAVEN_QT_ASSETSSDIALOG_H
+#endif // HEMP0X_QT_ASSETSSDIALOG_H

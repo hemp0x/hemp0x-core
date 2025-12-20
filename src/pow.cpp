@@ -15,8 +15,10 @@
 #include "chainparams.h"
 #include "tinyformat.h"
 
-unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params) {
-    /* current difficulty formula, dash - DarkGravity v3, written by Evan Duffield - evan@dash.org */
+unsigned int static DarkGravityWave(const CBlockIndex* pindexLast,
+                                    const CBlockHeader* pblock,
+                                    const Consensus::Params& params)
+{
     assert(pindexLast != nullptr);
 
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
@@ -44,11 +46,8 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
         return nPowLimitBits;
     }
 
+    // Special min-difficulty rules (unchanged)
     if (params.fPowAllowMinDifficultyBlocks && params.fPowNoRetargeting) {
-        // Special difficulty rule:
-        // If the new block's timestamp is more than 2 * 1 minutes
-        // then allow mining of a min-difficulty block.
-
         if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 2) {
             return nPowLimitBits;
         } else {
@@ -63,9 +62,9 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
         }
     }
 
+    // Average targets over past blocks + count KAWPOW blocks
     const CBlockIndex* pindex = pindexLast;
     arith_uint256 bnPastTargetAvg;
-
     int nKAWPOWBlocksFound = 0;
 
     for (int i = 1; i <= nPastBlocks; ++i) {
@@ -83,10 +82,7 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
         }
     }
 
-    // If we are mining a KAWPOW block. We check to see if we have mined
-    // 180 KAWPOW blocks already. If we haven't we are going to return our
-    // temp limit. This will allow us to change algos to kawpow without having to
-    // change the DGW math.
+    // KAWPOW transition safety (unchanged)
     if (pblock->nTime >= nKAWPOWActivationTime) {
         if (nKAWPOWBlocksFound != nPastBlocks) {
             return UintToArith256(params.kawpowLimit).GetCompact();
@@ -96,8 +92,6 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
     arith_uint256 bnNew(bnPastTargetAvg);
 
     int64_t nActualTimespan = pindexLast->GetBlockTime() - pindex->GetBlockTime();
-    // NOTE: is this accurate? nActualTimespan counts it for (nPastBlocks - 1) blocks only...
-
     const int64_t nTargetTimespan = nPastBlocks * params.nPowTargetSpacing;
 
     // Post-fix safety: never allow 0/negative timespans
@@ -113,7 +107,6 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
     if (nActualTimespan < nTargetTimespan / 3) nActualTimespan = nTargetTimespan / 3;
     if (nActualTimespan > nTargetTimespan * 3) nActualTimespan = nTargetTimespan * 3;
 
-    // Retarget
     bnNew *= nActualTimespan;
     bnNew /= nTargetTimespan;
 

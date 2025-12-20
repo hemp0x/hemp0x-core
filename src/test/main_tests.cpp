@@ -7,7 +7,7 @@
 #include "validation.h"
 #include "net.h"
 
-#include "test/test_raven.h"
+#include "test/test_hemp0x.h"
 
 #include <boost/signals2/signal.hpp>
 #include <boost/test/unit_test.hpp>

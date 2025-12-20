@@ -10,9 +10,9 @@ What is Hemp0x?
 ----------------
 
 Hemp0x is an experimental digital currency that enables instant payments to
-anyone, anywhere in the world. The Hemp0x platform also lets anyone create assets (tokens) on the Ravencoin network. 
+anyone, anywhere in the world. The Hemp0x platform also lets anyone create assets (tokens) on the Hemp0x network. 
 Assets can be used for NFTs, STOs, Gift Cards, and fractional ownership of anything of value.
-Ravencoin uses peer-to-peer technology to operate
+Hemp0x uses peer-to-peer technology to operate
 with no central authority: managing transactions and issuing money are carried
 out collectively by the network. 
 
@@ -28,8 +28,8 @@ Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/RavenProject/Ravencoin/tags) are created
-regularly to indicate new official, stable release versions of Raven Core.
+completely stable. [Tags](https://github.com/hemp0x/hemp0x-core/tags) are created
+regularly to indicate new official, stable release versions of Hemp0x Core.
 
 Active development is done in the `develop` branch. 
 
@@ -73,18 +73,18 @@ A digital peer to peer network for the facilitation of asset transfer.
 
 
 
-In the fictional world of Westeros, ravens are used as messengers who carry statements of truth. Ravencoin is a use case specific blockchain designed to carry statements of truth about who owns what assets. 
+In the fictional world of Westeros, hemp0xs are used as messengers who carry statements of truth. Hemp0x is a use case specific blockchain designed to carry statements of truth about who owns what assets. 
 
 
 
 Thank you to the Bitcoin developers. 
 
-The Ravencoin project is launched based on the hard work and continuous effort of over 400 Bitcoin developers who made over 14,000 commits over the life to date of the Bitcoin project. We are eternally grateful to you for your efforts and diligence in making a secure network and for their support of free and open source software development.  The Ravencoin experiment is made on the foundation you built.
+The Hemp0x project is launched based on the hard work and continuous effort of over 400 Bitcoin developers who made over 14,000 commits over the life to date of the Bitcoin project. We are eternally grateful to you for your efforts and diligence in making a secure network and for their support of free and open source software development.  The Hemp0x experiment is made on the foundation you built.
 
 
 Abstract
 ----------------
-Hemp0x aims to implement a blockchain which is optimized specifically for the use case of transferring assets such as securities from one holder to another. Based on the extensive development and testing of Bitcoin, Ravencoin is built on a fork of the Bitcoin code. Key changes include a faster block reward time and a change in the number, but not weighed distribution schedule, of coins. Ravencoin is free and open source and will be issued and mined transparently with no pre-mine, developer allocation or any other similar set aside. Ravencoin is intended to prioritize user control, privacy and censorship resistance and be jurisdiction agnostic while allowing simple optional additional features for users based on need.
+Hemp0x aims to implement a blockchain which is optimized specifically for the use case of transferring assets such as securities from one holder to another. Based on the extensive development and testing of Bitcoin, Hemp0x is built on a fork of the Bitcoin code. Key changes include a faster block reward time and a change in the number, but not weighed distribution schedule, of coins. Hemp0x is free and open source and will be issued and mined transparently with no pre-mine, developer allocation or any other similar set aside. Hemp0x is intended to prioritize user control, privacy and censorship resistance and be jurisdiction agnostic while allowing simple optional additional features for users based on need.
 
 
 

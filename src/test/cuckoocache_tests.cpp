@@ -5,7 +5,7 @@
 #include <boost/test/unit_test.hpp>
 #include "cuckoocache.h"
 #include "script/sigcache.h"
-#include "test/test_raven.h"
+#include "test/test_hemp0x.h"
 #include "random.h"
 #include <thread>
 
