@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_TEST_PAYMENTSERVERTESTS_H
-#define RAVEN_QT_TEST_PAYMENTSERVERTESTS_H
+#ifndef HEMP0X_QT_TEST_PAYMENTSERVERTESTS_H
+#define HEMP0X_QT_TEST_PAYMENTSERVERTESTS_H
 
 #include "../paymentserver.h"
 
@@ -33,4 +33,4 @@ public:
     SendCoinsRecipient recipient;
 };
 
-#endif // RAVEN_QT_TEST_PAYMENTSERVERTESTS_H
+#endif // HEMP0X_QT_TEST_PAYMENTSERVERTESTS_H

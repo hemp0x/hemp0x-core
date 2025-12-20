@@ -3,96 +3,96 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-bin_PROGRAMS += qt/raven-qt
-EXTRA_LIBRARIES += qt/libravenqt.a
+bin_PROGRAMS += qt/hemp0x-qt
+EXTRA_LIBRARIES += qt/libhemp0xqt.a
 
-# raven qt core #
+# hemp0x qt core #
 QT_TS = \
-  qt/locale/raven_af.ts \
-  qt/locale/raven_af_ZA.ts \
-  qt/locale/raven_ar.ts \
-  qt/locale/raven_be_BY.ts \
-  qt/locale/raven_bg_BG.ts \
-  qt/locale/raven_bg.ts \
-  qt/locale/raven_ca_ES.ts \
-  qt/locale/raven_ca.ts \
-  qt/locale/raven_ca@valencia.ts \
-  qt/locale/raven_cs.ts \
-  qt/locale/raven_cy.ts \
-  qt/locale/raven_da.ts \
-  qt/locale/raven_de.ts \
-  qt/locale/raven_el_GR.ts \
-  qt/locale/raven_el.ts \
-  qt/locale/raven_en_GB.ts \
-  qt/locale/raven_en.ts \
-  qt/locale/raven_eo.ts \
-  qt/locale/raven_es_AR.ts \
-  qt/locale/raven_es_CL.ts \
-  qt/locale/raven_es_CO.ts \
-  qt/locale/raven_es_DO.ts \
-  qt/locale/raven_es_ES.ts \
-  qt/locale/raven_es_MX.ts \
-  qt/locale/raven_es.ts \
-  qt/locale/raven_es_UY.ts \
-  qt/locale/raven_es_VE.ts \
-  qt/locale/raven_et_EE.ts \
-  qt/locale/raven_et.ts \
-  qt/locale/raven_eu_ES.ts \
-  qt/locale/raven_fa_IR.ts \
-  qt/locale/raven_fa.ts \
-  qt/locale/raven_fi.ts \
-  qt/locale/raven_fr_CA.ts \
-  qt/locale/raven_fr_FR.ts \
-  qt/locale/raven_fr.ts \
-  qt/locale/raven_gl.ts \
-  qt/locale/raven_he.ts \
-  qt/locale/raven_hi_IN.ts \
-  qt/locale/raven_hr.ts \
-  qt/locale/raven_hu.ts \
-  qt/locale/raven_id_ID.ts \
-  qt/locale/raven_it_IT.ts \
-  qt/locale/raven_it.ts \
-  qt/locale/raven_ja.ts \
-  qt/locale/raven_ka.ts \
-  qt/locale/raven_kk_KZ.ts \
-  qt/locale/raven_ko_KR.ts \
-  qt/locale/raven_ku_IQ.ts \
-  qt/locale/raven_ky.ts \
-  qt/locale/raven_la.ts \
-  qt/locale/raven_lt.ts \
-  qt/locale/raven_lv_LV.ts \
-  qt/locale/raven_mk_MK.ts \
-  qt/locale/raven_mn.ts \
-  qt/locale/raven_ms_MY.ts \
-  qt/locale/raven_nb.ts \
-  qt/locale/raven_ne.ts \
-  qt/locale/raven_nl.ts \
-  qt/locale/raven_pl.ts \
-  qt/locale/raven_pt_BR.ts \
-  qt/locale/raven_pt_PT.ts \
-  qt/locale/raven_ro_RO.ts \
-  qt/locale/raven_ro.ts \
-  qt/locale/raven_ru_RU.ts \
-  qt/locale/raven_ru.ts \
-  qt/locale/raven_sk.ts \
-  qt/locale/raven_sl_SI.ts \
-  qt/locale/raven_sq.ts \
-  qt/locale/raven_sr@latin.ts \
-  qt/locale/raven_sr.ts \
-  qt/locale/raven_sv.ts \
-  qt/locale/raven_ta.ts \
-  qt/locale/raven_th_TH.ts \
-  qt/locale/raven_tr_TR.ts \
-  qt/locale/raven_tr.ts \
-  qt/locale/raven_uk.ts \
-  qt/locale/raven_ur_PK.ts \
-  qt/locale/raven_uz@Cyrl.ts \
-  qt/locale/raven_vi.ts \
-  qt/locale/raven_vi_VN.ts \
-  qt/locale/raven_zh_CN.ts \
-  qt/locale/raven_zh_HK.ts \
-  qt/locale/raven_zh.ts \
-  qt/locale/raven_zh_TW.ts
+  qt/locale/hemp0x_af.ts \
+  qt/locale/hemp0x_af_ZA.ts \
+  qt/locale/hemp0x_ar.ts \
+  qt/locale/hemp0x_be_BY.ts \
+  qt/locale/hemp0x_bg_BG.ts \
+  qt/locale/hemp0x_bg.ts \
+  qt/locale/hemp0x_ca_ES.ts \
+  qt/locale/hemp0x_ca.ts \
+  qt/locale/hemp0x_ca@valencia.ts \
+  qt/locale/hemp0x_cs.ts \
+  qt/locale/hemp0x_cy.ts \
+  qt/locale/hemp0x_da.ts \
+  qt/locale/hemp0x_de.ts \
+  qt/locale/hemp0x_el_GR.ts \
+  qt/locale/hemp0x_el.ts \
+  qt/locale/hemp0x_en_GB.ts \
+  qt/locale/hemp0x_en.ts \
+  qt/locale/hemp0x_eo.ts \
+  qt/locale/hemp0x_es_AR.ts \
+  qt/locale/hemp0x_es_CL.ts \
+  qt/locale/hemp0x_es_CO.ts \
+  qt/locale/hemp0x_es_DO.ts \
+  qt/locale/hemp0x_es_ES.ts \
+  qt/locale/hemp0x_es_MX.ts \
+  qt/locale/hemp0x_es.ts \
+  qt/locale/hemp0x_es_UY.ts \
+  qt/locale/hemp0x_es_VE.ts \
+  qt/locale/hemp0x_et_EE.ts \
+  qt/locale/hemp0x_et.ts \
+  qt/locale/hemp0x_eu_ES.ts \
+  qt/locale/hemp0x_fa_IR.ts \
+  qt/locale/hemp0x_fa.ts \
+  qt/locale/hemp0x_fi.ts \
+  qt/locale/hemp0x_fr_CA.ts \
+  qt/locale/hemp0x_fr_FR.ts \
+  qt/locale/hemp0x_fr.ts \
+  qt/locale/hemp0x_gl.ts \
+  qt/locale/hemp0x_he.ts \
+  qt/locale/hemp0x_hi_IN.ts \
+  qt/locale/hemp0x_hr.ts \
+  qt/locale/hemp0x_hu.ts \
+  qt/locale/hemp0x_id_ID.ts \
+  qt/locale/hemp0x_it_IT.ts \
+  qt/locale/hemp0x_it.ts \
+  qt/locale/hemp0x_ja.ts \
+  qt/locale/hemp0x_ka.ts \
+  qt/locale/hemp0x_kk_KZ.ts \
+  qt/locale/hemp0x_ko_KR.ts \
+  qt/locale/hemp0x_ku_IQ.ts \
+  qt/locale/hemp0x_ky.ts \
+  qt/locale/hemp0x_la.ts \
+  qt/locale/hemp0x_lt.ts \
+  qt/locale/hemp0x_lv_LV.ts \
+  qt/locale/hemp0x_mk_MK.ts \
+  qt/locale/hemp0x_mn.ts \
+  qt/locale/hemp0x_ms_MY.ts \
+  qt/locale/hemp0x_nb.ts \
+  qt/locale/hemp0x_ne.ts \
+  qt/locale/hemp0x_nl.ts \
+  qt/locale/hemp0x_pl.ts \
+  qt/locale/hemp0x_pt_BR.ts \
+  qt/locale/hemp0x_pt_PT.ts \
+  qt/locale/hemp0x_ro_RO.ts \
+  qt/locale/hemp0x_ro.ts \
+  qt/locale/hemp0x_ru_RU.ts \
+  qt/locale/hemp0x_ru.ts \
+  qt/locale/hemp0x_sk.ts \
+  qt/locale/hemp0x_sl_SI.ts \
+  qt/locale/hemp0x_sq.ts \
+  qt/locale/hemp0x_sr@latin.ts \
+  qt/locale/hemp0x_sr.ts \
+  qt/locale/hemp0x_sv.ts \
+  qt/locale/hemp0x_ta.ts \
+  qt/locale/hemp0x_th_TH.ts \
+  qt/locale/hemp0x_tr_TR.ts \
+  qt/locale/hemp0x_tr.ts \
+  qt/locale/hemp0x_uk.ts \
+  qt/locale/hemp0x_ur_PK.ts \
+  qt/locale/hemp0x_uz@Cyrl.ts \
+  qt/locale/hemp0x_vi.ts \
+  qt/locale/hemp0x_vi_VN.ts \
+  qt/locale/hemp0x_zh_CN.ts \
+  qt/locale/hemp0x_zh_HK.ts \
+  qt/locale/hemp0x_zh.ts \
+  qt/locale/hemp0x_zh_TW.ts
 
 QT_FORMS_UI = \
   qt/forms/addressbookpage.ui \
@@ -132,10 +132,10 @@ QT_MOC_CPP = \
   qt/moc_assetcontroltreewidget.cpp \
   qt/moc_assetfilterproxy.cpp \
   qt/moc_bantablemodel.cpp \
-  qt/moc_ravenaddressvalidator.cpp \
-  qt/moc_ravenamountfield.cpp \
-  qt/moc_ravengui.cpp \
-  qt/moc_ravenunits.cpp \
+  qt/moc_hemp0xaddressvalidator.cpp \
+  qt/moc_hemp0xamountfield.cpp \
+  qt/moc_hemp0xgui.cpp \
+  qt/moc_hemp0xunits.cpp \
   qt/moc_callback.cpp \
   qt/moc_clientmodel.cpp \
   qt/moc_coincontroldialog.cpp \
@@ -186,28 +186,28 @@ QT_MOC_CPP = \
   qt/moc_sendassetsentry.cpp \
   qt/moc_mnemonicdialog.cpp
 
-RAVEN_MM = \
+HEMP0X_MM = \
   qt/macdockiconhandler.mm \
   qt/macnotificationhandler.mm
 
 QT_MOC = \
-  qt/raven.moc \
-  qt/ravenamountfield.moc \
+  qt/hemp0x.moc \
+  qt/hemp0xamountfield.moc \
   qt/callback.moc \
   qt/intro.moc \
   qt/overviewpage.moc \
   qt/rpcconsole.moc
 
-QT_QRC_CPP = qt/qrc_raven.cpp
-QT_QRC = qt/raven.qrc
-QT_QRC_LOCALE_CPP = qt/qrc_raven_locale.cpp
-QT_QRC_LOCALE = qt/raven_locale.qrc
+QT_QRC_CPP = qt/qrc_hemp0x.cpp
+QT_QRC = qt/hemp0x.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_hemp0x_locale.cpp
+QT_QRC_LOCALE = qt/hemp0x_locale.qrc
 
 PROTOBUF_CC = qt/paymentrequest.pb.cc
 PROTOBUF_H = qt/paymentrequest.pb.h
 PROTOBUF_PROTO = qt/paymentrequest.proto
 
-RAVEN_QT_H = \
+HEMP0X_QT_H = \
   qt/addressbookpage.h \
   qt/addresstablemodel.h \
   qt/askpassphrasedialog.h \
@@ -218,10 +218,10 @@ RAVEN_QT_H = \
   qt/assetsdialog.h \
   qt/createassetdialog.h \
   qt/bantablemodel.h \
-  qt/ravenaddressvalidator.h \
-  qt/ravenamountfield.h \
-  qt/ravengui.h \
-  qt/ravenunits.h \
+  qt/hemp0xaddressvalidator.h \
+  qt/hemp0xamountfield.h \
+  qt/hemp0xgui.h \
+  qt/hemp0xunits.h \
   qt/callback.h \
   qt/clientmodel.h \
   qt/coincontroldialog.h \
@@ -292,10 +292,10 @@ RES_ICONS = \
   qt/res/icons/asset_manage_selected.png \
   qt/res/icons/asset_transfer.png \
   qt/res/icons/asset_transfer_selected.png \
-  qt/res/icons/ravencointext.png \
-  qt/res/icons/raven.ico \
-  qt/res/icons/raven_testnet.ico \
-  qt/res/icons/raven.png \
+  qt/res/icons/hemp0xtext.png \
+  qt/res/icons/hemp0x.ico \
+  qt/res/icons/hemp0x_testnet.ico \
+  qt/res/icons/hemp0x.png \
   qt/res/icons/chevron.png \
   qt/res/icons/clock1.png \
   qt/res/icons/clock2.png \
@@ -391,12 +391,12 @@ RES_ICONS = \
   qt/res/fonts/OpenSans-SemiBoldItalic.ttf
 
 
-RAVEN_QT_BASE_CPP = \
+HEMP0X_QT_BASE_CPP = \
   qt/bantablemodel.cpp \
-  qt/ravenaddressvalidator.cpp \
-  qt/ravenamountfield.cpp \
-  qt/ravengui.cpp \
-  qt/ravenunits.cpp \
+  qt/hemp0xaddressvalidator.cpp \
+  qt/hemp0xamountfield.cpp \
+  qt/hemp0xgui.cpp \
+  qt/hemp0xunits.cpp \
   qt/clientmodel.cpp \
   qt/csvmodelwriter.cpp \
   qt/darkstyle.cpp \
@@ -417,9 +417,9 @@ RAVEN_QT_BASE_CPP = \
   qt/trafficgraphwidget.cpp \
   qt/utilitydialog.cpp
 
-RAVEN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+HEMP0X_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
 
-RAVEN_QT_WALLET_CPP = \
+HEMP0X_QT_WALLET_CPP = \
   qt/addressbookpage.cpp \
   qt/addresstablemodel.cpp \
   qt/askpassphrasedialog.cpp \
@@ -460,31 +460,31 @@ RAVEN_QT_WALLET_CPP = \
   qt/walletview.cpp \
   qt/mnemonicdialog.cpp
 
-RAVEN_QT_CPP = $(RAVEN_QT_BASE_CPP)
+HEMP0X_QT_CPP = $(HEMP0X_QT_BASE_CPP)
 if TARGET_WINDOWS
-RAVEN_QT_CPP += $(RAVEN_QT_WINDOWS_CPP)
+HEMP0X_QT_CPP += $(HEMP0X_QT_WINDOWS_CPP)
 endif
 if ENABLE_WALLET
-RAVEN_QT_CPP += $(RAVEN_QT_WALLET_CPP)
+HEMP0X_QT_CPP += $(HEMP0X_QT_WALLET_CPP)
 endif
 
 RES_IMAGES = 
 
 RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
 
-RAVEN_RC = qt/res/raven-qt-res.rc
+HEMP0X_RC = qt/res/hemp0x-qt-res.rc
 
-RAVEN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+HEMP0X_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
   -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
 
-qt_libravenqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES) $(RAVEN_QT_INCLUDES) \
+qt_libhemp0xqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(HEMP0X_INCLUDES) $(HEMP0X_QT_INCLUDES) \
   $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
-qt_libravenqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libhemp0xqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 
-qt_libravenqt_a_SOURCES = $(RAVEN_QT_CPP) $(RAVEN_QT_H) $(QT_FORMS_UI) \
+qt_libhemp0xqt_a_SOURCES = $(HEMP0X_QT_CPP) $(HEMP0X_QT_H) $(QT_FORMS_UI) \
   $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES)
 
-nodist_qt_libravenqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+nodist_qt_libhemp0xqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
   $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
 
 # forms/foo.h -> forms/ui_foo.h
@@ -493,71 +493,71 @@ QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:
 # Most files will depend on the forms and moc files as includes. Generate them
 # before anything else.
 $(QT_MOC): $(QT_FORMS_H)
-$(qt_libravenqt_a_OBJECTS) $(qt_raven_qt_OBJECTS) : | $(QT_MOC)
+$(qt_libhemp0xqt_a_OBJECTS) $(qt_hemp0x_qt_OBJECTS) : | $(QT_MOC)
 
 #Generating these with a half-written protobuf header leads to wacky results.
 #This makes sure it's done.
 $(QT_MOC): $(PROTOBUF_H)
 $(QT_MOC_CPP): $(PROTOBUF_H)
 
-# raven-qt binary #
-qt_raven_qt_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES) $(RAVEN_QT_INCLUDES) \
+# hemp0x-qt binary #
+qt_hemp0x_qt_CPPFLAGS = $(AM_CPPFLAGS) $(HEMP0X_INCLUDES) $(HEMP0X_QT_INCLUDES) \
   $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
-qt_raven_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_hemp0x_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 
-qt_raven_qt_SOURCES = qt/raven.cpp
+qt_hemp0x_qt_SOURCES = qt/hemp0x.cpp
 if TARGET_DARWIN
-  qt_raven_qt_SOURCES += $(RAVEN_MM)
+  qt_hemp0x_qt_SOURCES += $(HEMP0X_MM)
 endif
 if TARGET_WINDOWS
-  qt_raven_qt_SOURCES += $(RAVEN_RC)
+  qt_hemp0x_qt_SOURCES += $(HEMP0X_RC)
 endif
-qt_raven_qt_LDADD = qt/libravenqt.a $(LIBRAVEN_SERVER)
+qt_hemp0x_qt_LDADD = qt/libhemp0xqt.a $(LIBHEMP0X_SERVER)
 if ENABLE_WALLET
-qt_raven_qt_LDADD += $(LIBRAVEN_WALLET)
+qt_hemp0x_qt_LDADD += $(LIBHEMP0X_WALLET)
 endif
 if ENABLE_ZMQ
-qt_raven_qt_LDADD += $(LIBRAVEN_ZMQ) $(ZMQ_LIBS)
+qt_hemp0x_qt_LDADD += $(LIBHEMP0X_ZMQ) $(ZMQ_LIBS)
 endif
-qt_raven_qt_LDADD += $(LIBRAVEN_CLI) $(LIBRAVEN_COMMON) $(LIBRAVEN_UTIL) $(LIBRAVEN_CONSENSUS) $(LIBRAVEN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+qt_hemp0x_qt_LDADD += $(LIBHEMP0X_CLI) $(LIBHEMP0X_COMMON) $(LIBHEMP0X_UTIL) $(LIBHEMP0X_CONSENSUS) $(LIBHEMP0X_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
   $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
-qt_raven_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
-qt_raven_qt_LIBTOOLFLAGS = --tag CXX
+qt_hemp0x_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_hemp0x_qt_LIBTOOLFLAGS = --tag CXX
 
 #locale/foo.ts -> locale/foo.qm
 QT_QM=$(QT_TS:.ts=.qm)
 
 SECONDARY: $(QT_QM)
 
-$(srcdir)/qt/ravenstrings.cpp: $(libraven_server_a_SOURCES) $(libraven_wallet_a_SOURCES) $(libraven_common_a_SOURCES) $(libraven_zmq_a_SOURCES) $(libraven_consensus_a_SOURCES) $(libraven_util_a_SOURCES)
+$(srcdir)/qt/hemp0xstrings.cpp: $(libhemp0x_server_a_SOURCES) $(libhemp0x_wallet_a_SOURCES) $(libhemp0x_common_a_SOURCES) $(libhemp0x_zmq_a_SOURCES) $(libhemp0x_consensus_a_SOURCES) $(libhemp0x_util_a_SOURCES)
 	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
 	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" COPYRIGHT_HOLDERS="$(COPYRIGHT_HOLDERS)" COPYRIGHT_HOLDERS_SUBSTITUTION="$(COPYRIGHT_HOLDERS_SUBSTITUTION)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
 
-translate: $(srcdir)/qt/ravenstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(RAVEN_QT_BASE_CPP) qt/raven.cpp $(RAVEN_QT_WINDOWS_CPP) $(RAVEN_QT_WALLET_CPP) $(RAVEN_QT_H) $(RAVEN_MM)
+translate: $(srcdir)/qt/hemp0xstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(HEMP0X_QT_BASE_CPP) qt/hemp0x.cpp $(HEMP0X_QT_WINDOWS_CPP) $(HEMP0X_QT_WALLET_CPP) $(HEMP0X_QT_H) $(HEMP0X_MM)
 	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/raven_en.ts
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/hemp0x_en.ts
 
 $(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
 	@test -f $(RCC)
 	@cp -f $< $(@D)/temp_$(<F)
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name raven_locale $(@D)/temp_$(<F) | \
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name hemp0x_locale $(@D)/temp_$(<F) | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 	@rm $(@D)/temp_$(<F)
 
 $(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES) $(PROTOBUF_H)
 	@test -f $(RCC)
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name raven $< | \
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name hemp0x $< | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
-CLEAN_QT = $(nodist_qt_libravenqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno
+CLEAN_QT = $(nodist_qt_libhemp0xqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno
 
 CLEANFILES += $(CLEAN_QT)
 
-raven_qt_clean: FORCE
-	rm -f $(CLEAN_QT) $(qt_libravenqt_a_OBJECTS) $(qt_raven_qt_OBJECTS) qt/raven-qt$(EXEEXT) $(LIBRAVENQT)
+hemp0x_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libhemp0xqt_a_OBJECTS) $(qt_hemp0x_qt_OBJECTS) qt/hemp0x-qt$(EXEEXT) $(LIBHEMP0XQT)
 
-raven_qt : qt/raven-qt$(EXEEXT)
+hemp0x_qt : qt/hemp0x-qt$(EXEEXT)
 
 ui_%.h: %.ui
 	@test -f $(UIC)

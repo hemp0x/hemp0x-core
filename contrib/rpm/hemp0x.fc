@@ -1,0 +1,8 @@
+/usr/bin/hemp0x-cli		--	gen_context(system_u:object_r:hemp0x_exec_t,s0)
+/usr/sbin/hemp0xd		--	gen_context(system_u:object_r:hemp0x_exec_t,s0)
+/usr/lib(64)?/hemp0x/hemp0xd		--	gen_context(system_u:object_r:hemp0x_exec_t,s0)
+
+/etc/hemp0x(/.*)?		gen_context(system_u:object_r:hemp0x_conf_t,s0)
+/var/lib/hemp0x(/.*)?		gen_context(system_u:object_r:hemp0x_var_lib_t,s0)
+
+(/var)?/run/hemp0xd(/.*)?   gen_context(system_u:object_r:hemp0x_var_run_t,s0)

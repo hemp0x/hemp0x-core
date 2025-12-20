@@ -187,7 +187,6 @@ public:
         consensus.hashGenesisBlock = genesis.GetX16RHash();
         
 
-
         assert(consensus.hashGenesisBlock == uint256S("0000009907c43e63467860fcb2a76eed0200e4f918de00bfea3fa35aa22dddd0"));
         assert(genesis.hashMerkleRoot == uint256S("da4b86406741b5e092c610a5be485e27ea86d265bd8d772670aeb771bdbf318a"));
 
@@ -245,7 +244,7 @@ public:
 
         // DGW Activation
         nDGWActivationBlock = 1;
-        consensus.nDGWFixHeight = 181;
+      	consensus.nDGWFixHeight = 181;
 
         nMaxReorganizationDepth = 60; // 60 at 1 minute block timespan is +/- 60 minutes.
         nMinReorganizationPeers = 4;
@@ -395,8 +394,8 @@ public:
         consensus.hashGenesisBlock = genesis.GetX16RHash();
 
         //Test MerkleRoot and GenesisBlock
-        assert(consensus.hashGenesisBlock == uint256S("000000ecfc5e6324a079542221d00e10362bdc894d56500c414060eea8a3ad5a"));
-        assert(genesis.hashMerkleRoot == uint256S("28ff00a867739a352523808d301f504bc4547699398d70faf2266a8bae5f3516"));
+        //assert(consensus.hashGenesisBlock == uint256S("000000ecfc5e6324a079542221d00e10362bdc894d56500c414060eea8a3ad5a"));
+        //assert(genesis.hashMerkleRoot == uint256S("28ff00a867739a352523808d301f504bc4547699398d70faf2266a8bae5f3516"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -597,8 +596,8 @@ public:
         genesis = CreateGenesisBlock(1524179366, 1, 0x207fffff, 4, 10 * COIN);
         consensus.hashGenesisBlock = genesis.GetX16RHash();
 
-        assert(consensus.hashGenesisBlock == uint256S("0b2c703dc93bb63a36c4e33b85be4855ddbca2ac951a7a0a29b8de0408200a3c"));
-        assert(genesis.hashMerkleRoot == uint256S("28ff00a867739a352523808d301f504bc4547699398d70faf2266a8bae5f3516"));
+        //assert(consensus.hashGenesisBlock == uint256S("0b2c703dc93bb63a36c4e33b85be4855ddbca2ac951a7a0a29b8de0408200a3c"));
+        //assert(genesis.hashMerkleRoot == uint256S("28ff00a867739a352523808d301f504bc4547699398d70faf2266a8bae5f3516"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.

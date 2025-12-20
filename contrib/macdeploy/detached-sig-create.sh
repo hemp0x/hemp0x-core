@@ -7,7 +7,7 @@
 set -e
 
 ROOTDIR=dist
-BUNDLE="${ROOTDIR}/Raven-Qt.app"
+BUNDLE="${ROOTDIR}/Hemp0x-Qt.app"
 CODESIGN=codesign
 TEMPDIR=sign.temp
 TEMPLIST=${TEMPDIR}/signatures.txt

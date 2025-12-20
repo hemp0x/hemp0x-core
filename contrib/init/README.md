@@ -1,11 +1,11 @@
 Sample configuration files for:
 ```
-SystemD: ravend.service
-Upstart: ravend.conf
-OpenRC:  ravend.openrc
-         ravend.openrcconf
-CentOS:  ravend.init
-OS X:    org.raven.ravend.plist
+SystemD: hemp0xd.service
+Upstart: hemp0xd.conf
+OpenRC:  hemp0xd.openrc
+         hemp0xd.openrcconf
+CentOS:  hemp0xd.init
+OS X:    org.hemp0x.hemp0xd.plist
 ```
 have been made available to assist packagers in creating node packages here.
 

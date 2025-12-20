@@ -1,6 +1,6 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Ravencoin
-Source: https://github.com/RavenProject/Ravencoin
+Upstream-Name: Hemp0x
+Source: https://github.com/hemp0x/hemp0x-core
 
 Files: *
 Copyright: 2009-2017, Bitcoin Core Developers
@@ -77,9 +77,9 @@ License: Expat
 Comment: Modifications of Stephan Hutchings Typicons
 
 Files: src/qt/res/icons/about.png
-       src/qt/res/icons/raven.*
-       share/pixmaps/raven*
-       src/qt/res/src/raven.svg
+       src/qt/res/icons/hemp0x.*
+       share/pixmaps/hemp0x*
+       src/qt/res/src/hemp0x.svg
 Copyright: The Raven Core Developers
 License: public-domain
 

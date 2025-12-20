@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_CONSENSUS_PARAMS_H
-#define RAVEN_CONSENSUS_PARAMS_H
+#ifndef HEMP0X_CONSENSUS_PARAMS_H
+#define HEMP0X_CONSENSUS_PARAMS_H
 
 #include "uint256.h"
 #include <map>
@@ -79,7 +79,8 @@ struct Params {
     uint256 defaultAssumeValid;
     bool nSegwitEnabled;
     bool nCSVEnabled;
+    int nDGWFixHeight;
 };
 } // namespace Consensus
 
-#endif // RAVEN_CONSENSUS_PARAMS_H
+#endif // HEMP0X_CONSENSUS_PARAMS_H

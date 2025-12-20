@@ -107,7 +107,7 @@
                <number>6</number>
               </property>
               <item>
-               <widget class="QLabel" name="rvnBalancesLabel">
+               <widget class="QLabel" name="hempBalancesLabel">
                 <property name="font">
                  <font>
                   <weight>75</weight>
@@ -131,7 +131,7 @@
                  </size>
                 </property>
                 <property name="toolTip">
-                 <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Raven network after a connection is established, but this process has not completed yet.</string>
+                 <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Hemp0x network after a connection is established, but this process has not completed yet.</string>
                 </property>
                 <property name="text">
                  <string/>
@@ -550,7 +550,7 @@
                  </size>
                 </property>
                 <property name="toolTip">
-                 <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Raven network after a connection is established, but this process has not completed yet.</string>
+                 <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Hemp0x network after a connection is established, but this process has not completed yet.</string>
                 </property>
                 <property name="text">
                  <string/>
@@ -748,7 +748,7 @@
                  </size>
                 </property>
                 <property name="toolTip">
-                 <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Raven network after a connection is established, but this process has not completed yet.</string>
+                 <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Hemp0x network after a connection is established, but this process has not completed yet.</string>
                 </property>
                 <property name="text">
                  <string/>

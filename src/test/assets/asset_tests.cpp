@@ -4,7 +4,7 @@
 
 #include <assets/assets.h>
 
-#include <test/test_raven.h>
+#include <test/test_hemp0x.h>
 
 #include <boost/test/unit_test.hpp>
 #include "core_write.cpp"
@@ -47,20 +47,20 @@ BOOST_FIXTURE_TEST_SUITE(asset_tests, BasicTestingSetup)
         BOOST_CHECK(!IsAssetNameValid("A._BC", type));
         BOOST_CHECK(!IsAssetNameValid("AB_.C", type));
 
-        //- Versions of RAVENCOIN NOT allowed
-        BOOST_CHECK(!IsAssetNameValid("RVN", type));
-        BOOST_CHECK(!IsAssetNameValid("RAVEN", type));
-        BOOST_CHECK(!IsAssetNameValid("RAVENCOIN", type));
+        //- Versions of HEMP0X NOT allowed
+        BOOST_CHECK(!IsAssetNameValid("HEMP", type));
+        BOOST_CHECK(!IsAssetNameValid("HEMP0X", type));
+        BOOST_CHECK(!IsAssetNameValid("HEMP0X", type));
 
-        //- Versions of RAVENCOIN ALLOWED
-        BOOST_CHECK(IsAssetNameValid("RAVEN.COIN", type));
-        BOOST_CHECK(IsAssetNameValid("RAVEN_COIN", type));
-        BOOST_CHECK(IsAssetNameValid("RVNSPYDER", type));
-        BOOST_CHECK(IsAssetNameValid("SPYDERRVN", type));
-        BOOST_CHECK(IsAssetNameValid("RAVENSPYDER", type));
-        BOOST_CHECK(IsAssetNameValid("SPYDERAVEN", type));
-        BOOST_CHECK(IsAssetNameValid("BLACK_RAVENS", type));
-        BOOST_CHECK(IsAssetNameValid("SERVNOT", type));
+        //- Versions of HEMP0X ALLOWED
+        BOOST_CHECK(IsAssetNameValid("HEMP0X.COIN", type));
+        BOOST_CHECK(IsAssetNameValid("HEMP0X_COIN", type));
+        BOOST_CHECK(IsAssetNameValid("HEMPSPYDER", type));
+        BOOST_CHECK(IsAssetNameValid("SPYDERHEMP", type));
+        BOOST_CHECK(IsAssetNameValid("HEMP0XSPYDER", type));
+        BOOST_CHECK(IsAssetNameValid("SPYDEHEMP0X", type));
+        BOOST_CHECK(IsAssetNameValid("BLACK_HEMP0XS", type));
+        BOOST_CHECK(IsAssetNameValid("SEHEMPOT", type));
 
         // subs
         BOOST_CHECK(IsAssetNameValid("ABC/A", type));
@@ -227,7 +227,7 @@ BOOST_FIXTURE_TEST_SUITE(asset_tests, BasicTestingSetup)
         SelectParams(CBaseChainParams::MAIN);
 
         // Create the asset scriptPubKey
-        CAssetTransfer asset("RAVEN", 1000);
+        CAssetTransfer asset("HEMP0X", 1000);
         CScript scriptPubKey = GetScriptForDestination(DecodeDestination(GetParams().GlobalBurnAddress()));
         asset.ConstructTransaction(scriptPubKey);
 
@@ -248,7 +248,7 @@ BOOST_FIXTURE_TEST_SUITE(asset_tests, BasicTestingSetup)
         SelectParams(CBaseChainParams::MAIN);
 
         // Create the asset scriptPubKey
-        CNewAsset asset("RAVEN", 1000, 8, 1, 0, "");
+        CNewAsset asset("HEMP0X", 1000, 8, 1, 0, "");
         CScript scriptPubKey = GetScriptForDestination(DecodeDestination(GetParams().GlobalBurnAddress()));
         asset.ConstructTransaction(scriptPubKey);
 

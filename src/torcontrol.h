@@ -6,8 +6,8 @@
 /**
  * Functionality for communicating with Tor.
  */
-#ifndef RAVEN_TORCONTROL_H
-#define RAVEN_TORCONTROL_H
+#ifndef HEMP0X_TORCONTROL_H
+#define HEMP0X_TORCONTROL_H
 
 #include "scheduler.h"
 
@@ -18,4 +18,4 @@ void StartTorControl(boost::thread_group& threadGroup, CScheduler& scheduler);
 void InterruptTorControl();
 void StopTorControl();
 
-#endif /* RAVEN_TORCONTROL_H */
+#endif /* HEMP0X_TORCONTROL_H */
