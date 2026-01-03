@@ -6,6 +6,14 @@
 
 #include "validation.h"
 
+// Global Consensus State Definitions
+bool fAssetsIsActive = false;
+bool fRip5IsActive = false;
+bool fTransferScriptIsActive = false;
+bool fEnforcedValuesIsActive = false;
+bool fCheckCoinbaseAssetsIsActive = false;
+
+
 #include "arith_uint256.h"
 #include "chain.h"
 #include "chainparams.h"
@@ -5771,7 +5779,7 @@ bool AreCoinbaseCheckAssetsDeployed()
         return true;
 
     const ThresholdState thresholdState = VersionBitsTipState(GetParams().GetConsensus(), Consensus::DEPLOYMENT_COINBASE_ASSETS);
-    if (thresholdState == THRESHOLD_ACTIVE)
+    if (thresholdState == THRESHOLD_ACTIVE || (chainActive.Tip() && chainActive.Tip()->nHeight >= 265000))
         fCheckCoinbaseAssetsIsActive = true;
 
     return fCheckCoinbaseAssetsIsActive;
@@ -5784,7 +5792,7 @@ bool AreAssetsDeployed()
         return true;
 
     const ThresholdState thresholdState = VersionBitsTipState(GetParams().GetConsensus(), Consensus::DEPLOYMENT_ASSETS);
-    if (thresholdState == THRESHOLD_ACTIVE)
+    if (thresholdState == THRESHOLD_ACTIVE || (chainActive.Tip() && chainActive.Tip()->nHeight >= 265000))
         fAssetsIsActive = true;
 
     return fAssetsIsActive;
@@ -5796,7 +5804,7 @@ bool IsRip5Active()
         return true;
 
     const ThresholdState thresholdState = VersionBitsTipState(GetParams().GetConsensus(), Consensus::DEPLOYMENT_MSG_REST_ASSETS);
-    if (thresholdState == THRESHOLD_ACTIVE)
+    if (thresholdState == THRESHOLD_ACTIVE || (chainActive.Tip() && chainActive.Tip()->nHeight >= 265000))
         fRip5IsActive = true;
 
     return fRip5IsActive;
@@ -5813,7 +5821,7 @@ bool AreTransferScriptsSizeDeployed() {
         return true;
 
     const ThresholdState thresholdState = VersionBitsTipState(GetParams().GetConsensus(), Consensus::DEPLOYMENT_TRANSFER_SCRIPT_SIZE);
-    if (thresholdState == THRESHOLD_ACTIVE)
+    if (thresholdState == THRESHOLD_ACTIVE || (chainActive.Tip() && chainActive.Tip()->nHeight >= 265000))
         fTransferScriptIsActive = true;
 
     return fTransferScriptIsActive;

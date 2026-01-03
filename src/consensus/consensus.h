@@ -1,3 +1,4 @@
+#define UNUSED_VAR __attribute__((unused))
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2020 The Raven Core developers
@@ -31,14 +32,14 @@ static const int WITNESS_SCALE_FACTOR = 4;
 static const size_t MIN_TRANSACTION_WEIGHT = WITNESS_SCALE_FACTOR * 60; // 60 is the lower bound for the size of a valid serialized CTransaction
 static const size_t MIN_SERIALIZABLE_TRANSACTION_WEIGHT = WITNESS_SCALE_FACTOR * 10; // 10 is the lower bound for the size of a serialized CTransaction
 
-#define UNUSED_VAR     __attribute__ ((unused))
+
 //! This variable needs to in this class because undo.h uses it. However because it is in this class
-//! it causes unused variable warnings when compiling. This UNUSED_VAR removes the unused warnings
-UNUSED_VAR static bool fAssetsIsActive = false;
-UNUSED_VAR static bool fRip5IsActive = false;
-UNUSED_VAR static bool fTransferScriptIsActive = false;
-UNUSED_VAR static bool fEnforcedValuesIsActive = false;
-UNUSED_VAR static bool fCheckCoinbaseAssetsIsActive = false;
+//! it causes unused variable warnings when compiling. This removes the unused warnings
+extern bool fAssetsIsActive;
+extern bool fRip5IsActive;
+extern bool fTransferScriptIsActive;
+extern bool fEnforcedValuesIsActive;
+extern bool fCheckCoinbaseAssetsIsActive;
 
 unsigned int GetMaxBlockWeight();
 unsigned int GetMaxBlockSerializedSize();
