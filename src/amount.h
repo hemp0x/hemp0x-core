@@ -17,14 +17,13 @@ static const CAmount CENT = 1000000;
 
 /** No amount larger than this (in satoshi) is valid.
  *
- * Note that this constant is *not* the total money supply, which in Hemp0x
- * currently happens to be less than 21,000,000,000 HEMP for various reasons, but
- * rather a sanity check. As this sanity check is used by consensus-critical
- * validation code, the exact value of the MAX_MONEY constant is consensus
- * critical; in unusual circumstances like a(nother) overflow bug that allowed
- * for the creation of coins out of thin air modification could lead to a fork.
+ * Note that this constant is *not* the total HEMP coin supply, which is 420M
+ * and controlled by the emission schedule. This value serves as a sanity check
+ * ceiling for validation, particularly for asset issuance quantities. As this
+ * is used by consensus-critical validation code, the exact value of MAX_MONEY
+ * is consensus critical; modification could lead to a fork.
  * */
-static const CAmount MAX_MONEY = 420000000 * COIN;
+static const CAmount MAX_MONEY = 21000000000 * COIN;
 inline bool MoneyRange(const CAmount& nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 
 #endif //  HEMP0X_AMOUNT_H
