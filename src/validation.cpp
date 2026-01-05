@@ -5767,7 +5767,7 @@ bool AreEnforcedValuesDeployed()
         return true;
 
     const ThresholdState thresholdState = VersionBitsTipState(GetParams().GetConsensus(), Consensus::DEPLOYMENT_ENFORCE_VALUE);
-    if (thresholdState == THRESHOLD_ACTIVE || thresholdState == THRESHOLD_LOCKED_IN)
+    if (thresholdState == THRESHOLD_ACTIVE || thresholdState == THRESHOLD_LOCKED_IN || (chainActive.Tip() && chainActive.Tip()->nHeight >= 265000))
         fEnforcedValuesIsActive = true;
 
     return fEnforcedValuesIsActive;
